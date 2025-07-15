@@ -1,40 +1,47 @@
+```plaintext
 src
-├── assets/                 # Static assets
+├── assets/                 # Static assets (images, icons, global css)
 │   ├── images/
 │   ├── icons/
-│   └── styles/             # Global styles or Tailwind config
+│   └── styles/
 │
-├── components/             # Pure reusable UI components (no business logic)
-│   ├── common/             # Buttons, Modals, Inputs
+├── components/             # Reusable UI components
+│   ├── common/             # Buttons, Inputs, Modals
 │   └── layout/             # Navbar, Sidebar, Footer
 │
-├── features/               # Group by feature (highly scalable)
+├── features/               # Grouped by feature (scalable)
 │   ├── admission/
-│   │   ├── components/     # Feature-specific components
-│   │   ├── pages/          # AdmissionHome.jsx, AdmissionForm.jsx, etc.
-│   │   ├── services/       # admissionService.js (API calls)
-│   │   ├── hooks/          # useAdmission.js
-│   │   └── index.js
+│   │   ├── pages/
+│   │   │   ├── AdmissionHome.jsx
+│   │   │   └── AdmissionForm.jsx
+│   │   ├── components/
+│   │   ├── services/       # admissionService.js
+│   │   └── hooks/
 │   │
 │   ├── enrollment/
-│   │   ├── components/
 │   │   ├── pages/
+│   │   │   ├── EnrollmentHome.jsx
+│   │   │   └── EnrollmentForm.jsx
+│   │   ├── components/
 │   │   ├── services/
-│   │   └── index.js
+│   │   └── hooks/
 │   │
 │   └── auth/
-│       ├── components/
 │       ├── pages/
+│       │   ├── Login.jsx
+│       │   ├── Register.jsx
+│       │   └── ForgotPassword.jsx
 │       ├── services/
 │       └── hooks/
 │
-├── context/                # Global state (AuthContext, ThemeContext, etc.)
+├── context/                # AuthContext, ThemeContext, etc.
 │
-├── hooks/                  # Truly global hooks
+├── hooks/                  # Global custom hooks
 │
-├── routes/                 # AppRoutes.jsx or route definitions
+├── routes/                 # AppRoutes.jsx, route configs
 │
-├── utils/                  # Utility helpers (formatDate, validators)
+├── utils/                  # Helper functions (formatDate, validators)
 │
-├── App.jsx
-└── main.jsx
+├── App.jsx                 # Main App
+└── main.jsx                # Entry point
+```
