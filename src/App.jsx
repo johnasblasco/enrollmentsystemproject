@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import AppRoutes from './routes/AppRoutes'
 import Aos from 'aos'
+import 'aos/dist/aos.css'
 const App = () => {
   useEffect(() => {
     Aos.init({
