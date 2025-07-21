@@ -1,6 +1,5 @@
 import React from 'react'
 import Login from '../auth/pages/Login'
-import Register from '../auth/pages/Register'
 import RegisterTwo from '../auth/pages/RegisterTwo'
 import { useRoutes } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
@@ -13,11 +12,6 @@ const AppRoutes = () => {
             path: '/',
             element: <Login />
         },
-        {
-            path: '/register',
-            element: <Register />
-        },
-
         {
             path: '/register/personal-information',
             element: <RegisterTwo />
