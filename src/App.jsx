@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import AppRoutes from './routes/AppRoutes'
+import { RegisterProvider } from './dashboard/features/auth/contexts/RegisterContext'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 const App = () => {
@@ -10,8 +11,9 @@ const App = () => {
   }, [])
   return (
     <>
-
-      <AppRoutes />
+      <RegisterProvider>
+        <AppRoutes />
+      </RegisterProvider>
     </>
   )
 }

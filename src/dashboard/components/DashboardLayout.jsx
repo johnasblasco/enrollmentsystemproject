@@ -11,10 +11,10 @@ const DashboardLayout = ({ children }) => {
                     <Link to="/dashboard" className="hover:bg-gray-800 p-2 rounded">
                         📊 Dashboard
                     </Link>
-                    <Link to="/admission" className="hover:bg-gray-800 p-2 rounded">
+                    <Link to="/dashboard/admission" className="hover:bg-gray-800 p-2 rounded">
                         📝 Admissions
                     </Link>
-                    <Link to="/enrollment" className="hover:bg-gray-800 p-2 rounded">
+                    <Link to="/dashboard/enrollment" className="hover:bg-gray-800 p-2 rounded">
                         📚 Enrollments
                     </Link>
                 </nav>

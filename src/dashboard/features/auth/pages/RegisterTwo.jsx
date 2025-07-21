@@ -3,14 +3,54 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const RegisterTwo = () => {
+
+
+
+    // name
+    const [surname, setSurname] = useState('');
+    const [givenName, setGivenName] = useState('');
+    const [middleName, setMiddleName] = useState('');
+    const [suffix, setSuffix] = useState('');
+
+    // birth
+    const [dob, setDob] = useState('');
+    const [pob, setPob] = useState('');
+
+    // other selects
+    const [gender, setGender] = useState('');
+    const [civilStatus, setCivilStatus] = useState('');
+    const [indigenous, setIndigenous] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [houseStreet, setHouseStreet] = useState('');
+
+    // from your province/city logic
+    const [province, setProvince] = useState('');
+    const [city, setCity] = useState('');
+    const [barangay, setBarangay] = useState('');
+
+    // contact
+    const [nationality, setNationality] = useState('');
+    const [religion, setReligion] = useState('');
+    const [ethnic, setEthnic] = useState('');
+    const [tel, setTel] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [email, setEmail] = useState('');
+
+    // yes/no
+    const [is4ps, setIs4ps] = useState('');
+    const [vaccinated, setVaccinated] = useState('');
+    const [isIp, setIsIp] = useState('');
+
+
+
+    // API CALLS COLLECTIONS
     const [provinces, setProvinces] = useState([])
     const [cities, setCities] = useState([])
     const [selectedProvince, setSelectedProvince] = useState('')
     const [barangays, setBarangays] = useState([])
-
     const [selectedCity, setSelectedCity] = useState('')
 
-    // ✅ Fetch provinces once
+
     useEffect(() => {
         const fetchProvinces = async () => {
             try {
@@ -23,7 +63,6 @@ const RegisterTwo = () => {
         fetchProvinces()
     }, [])
 
-    // ✅ Fetch cities when province changes
     useEffect(() => {
         if (!selectedProvince) {
             setCities([])
@@ -60,6 +99,39 @@ const RegisterTwo = () => {
         fetchBarangays()
     }, [selectedCity])
 
+
+    const handleNext = () => {
+        const payload = {
+            surname,
+            givenName,
+            middleName,
+            suffix,
+            dob,
+            pob,
+            gender,
+            civilStatus,
+            indigenous,
+            pwd,
+            houseStreet,
+            province,
+            city,
+            barangay,
+            nationality,
+            religion,
+            ethnic,
+            tel,
+            mobile,
+            email,
+            is4ps,
+            vaccinated,
+            isIp
+        };
+
+        setRegisterData(prev => ({ ...prev, ...payload })); // merge with step one data
+        console.log(registerData)
+        navigate('/dashboard'); // or next step
+    };
+
     return (
         <div>
             <section className="flex flex-col gap-4 justify-center items-center py-16">
@@ -71,7 +143,10 @@ const RegisterTwo = () => {
 
                     {/* Name Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <InputWithLabel label="Surname" required />
+                        <InputWithLabel label="Surname" required
+                            value={surname}
+                            onChange={e => setSurname(e.target.value)}
+                        />
                         <InputWithLabel label="Given name" required />
                         <InputWithLabel label="Middle name" />
                         <InputWithLabel label="Suffix" />
@@ -210,25 +285,29 @@ const RegisterTwo = () => {
     )
 }
 
-const InputWithLabel = ({ label, type = 'text', required = false }) => (
+const InputWithLabel = ({ label, type = 'text', required = false, value, onChange }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700">
             {label} {required && <span className="text-red-500">*</span>}
         </label>
         <input
             type={type}
+            value={value}
+            onChange={onChange}
             className={`mt-1 block w-full border rounded p-2 ${required ? 'border-red-500' : 'border-gray-300'}`}
             placeholder={type === 'text' ? `Enter ${label.toLowerCase()}` : ''}
         />
     </div>
-)
+);
 
-const SelectWithLabel = ({ label, required = false, options = [], onChange }) => (
+
+const SelectWithLabel = ({ label, required = false, options = [], value, onChange }) => (
     <div>
         <label className="block text-sm font-medium text-gray-700">
             {label} {required && <span className="text-red-500">*</span>}
         </label>
         <select
+            value={value}
             onChange={onChange}
             className={`mt-1 block w-full border rounded p-2 bg-white ${required ? 'border-red-500' : 'border-gray-300'}`}
         >
@@ -240,6 +319,7 @@ const SelectWithLabel = ({ label, required = false, options = [], onChange }) =>
             ))}
         </select>
     </div>
-)
+);
+
 
 export default RegisterTwo
