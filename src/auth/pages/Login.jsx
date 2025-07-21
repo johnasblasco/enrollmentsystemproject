@@ -158,7 +158,7 @@ const Login = () => {
                 <div className="flex items-center justify-between">
                     <p className="text-sm text-gray-600">
                         No account yet?
-                        <Link to={"/register"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
+                        <Link to={"/register/personal-information"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
                     </p>
                     <button onClick={handleButton}
                         className="inline-block rounded-lg hover:cursor-pointer hover:scale-95 bg-purple-600 px-5 py-3 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
