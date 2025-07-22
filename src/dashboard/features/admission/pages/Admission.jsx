@@ -1,5 +1,6 @@
 import React from 'react'
 import DashboardLayout from '@/dashboard/components/DashboardLayout'
+import FormField from '../components/Form/FormFields'
 import SchoolCampus from '../components/dropdowns/SchoolCampus'
 import AcademicYear from '../components/dropdowns/AcademicYear'
 import ApplicationType from '../components/dropdowns/ApplicationType'
@@ -7,37 +8,61 @@ import Classifications from '../components/dropdowns/Classifications'
 import AcademicProgram from '../components/dropdowns/AcademicProgram'
 import SeparatorOne from '../components/separator/SeparatorOne'
 import { Link } from 'react-router-dom'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 
 const Admission = () => {
     return (
         <DashboardLayout>
-            <section className="flex flex-col gap-4 justify-center items-center">
-                <form className="flex flex-col gap-8 justify-center items-center border-2 w-fit py-10 md:p-20">
-                    <div className="grid grid-cols-1 gap-4">
-                        <SchoolCampus />
-                        <AcademicYear />
-                        <ApplicationType />
-                        <Classifications />
-                        <SeparatorOne />
-                        <AcademicProgram />
-                    </div>
+            <section className="flex justify-center w-full">
+                <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-4xl border border-gray-200">
+                    <h1 className="text-3xl font-bold mb-2 text-gray-800">📝 Admission Form</h1>
+                    <p className="text-gray-500 mb-8">Please fill out the following fields to admit a student.</p>
 
-                    {/* Navigation */}
-                    <div className="flex justify-between pt-4 w-full">
-                        <Link
-                            to="/dashboard/admission"
-                            className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400"
-                        >
-                            Previous
-                        </Link>
-                        <Link
-                            to="/dashboard/admission"
-                            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                        >
-                            Next
-                        </Link>
-                    </div>
-                </form>
+                    <form className="flex flex-col gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <FormField label="School Campus">
+                                <SchoolCampus />
+                            </FormField>
+
+                            <FormField label="Academic Year">
+                                <AcademicYear />
+                            </FormField>
+
+                            <FormField label="Application Type">
+                                <ApplicationType />
+                            </FormField>
+
+                            <FormField label="Classifications">
+                                <Classifications />
+                            </FormField>
+
+                            <div className="md:col-span-2">
+                                <SeparatorOne />
+                            </div>
+
+                            <FormField label="Academic Program">
+                                <AcademicProgram />
+                            </FormField>
+                        </div>
+
+                        <div className="flex justify-between pt-4">
+                            <Link
+                                to="/dashboard"
+                                className="flex items-center gap-2 px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
+                            >
+                                <ArrowLeft className="w-4 h-4" />
+                                Previous
+                            </Link>
+                            <Link
+                                to="/dashboard/enrollment"
+                                className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                Next
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
+                        </div>
+                    </form>
+                </div>
             </section>
         </DashboardLayout>
     )

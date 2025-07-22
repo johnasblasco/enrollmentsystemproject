@@ -5,6 +5,7 @@ import { useRoutes } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
 import Admission from '../dashboard/features/admission/pages/Admission'
 import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
+import OAuthCallback from '@/auth/oath/OAuthCallBack'
 
 const AppRoutes = () => {
     const routes = useRoutes([
@@ -12,6 +13,11 @@ const AppRoutes = () => {
             path: '/',
             element: <Login />
         },
+        {
+            path: '/oauth/callback',
+            element: <OAuthCallback />
+        },
+
         {
             path: '/register/personal-information',
             element: <RegisterTwo />

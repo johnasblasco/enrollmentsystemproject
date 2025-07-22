@@ -3,11 +3,11 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const Login = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
 
@@ -31,7 +31,6 @@ const Login = () => {
     const handleButton = async (e) => {
         e.preventDefault(); // Prevent htmlForm submission reload
         setLoading(true);
-        setError('');
 
         try {
             const response = await axios.post('https://server.laravel.bpc-bsis4d.com/public/api/login', {
@@ -49,14 +48,26 @@ const Login = () => {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
 
-                console.log('Logged in successfully:', data.user);
+                await Swal.fire({
+                    title: "Account Matched!",
+                    icon: "success",
+                    draggable: true
+                });
                 navigate('/dashboard');
             } else {
-                setError(data.message || 'Login failed.');
+                await Swal.fire({
+                    title: "Invalid Credentials!",
+                    icon: "error",
+                    draggable: true
+                });
             }
 
         } catch (err) {
-            setError('Login failed. Please check your credentials.');
+            await Swal.fire({
+                title: "Incorrect Credentials!",
+                icon: "error",
+                draggable: true
+            });
             console.error('Login error:', err);
         } finally {
             setLoading(false);
