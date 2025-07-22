@@ -13,10 +13,10 @@ import { ArrowLeft, ArrowRight } from 'lucide-react'
 const Admission = () => {
     return (
         <DashboardLayout>
-            <section className="flex justify-center w-full">
-                <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-4xl border border-gray-200">
-                    <h1 className="text-3xl font-bold mb-2 text-gray-800">📝 Admission Form</h1>
-                    <p className="text-gray-500 mb-8">Please fill out the following fields to admit a student.</p>
+            <h1 className="text-3xl font-bold mb-2 text-gray-800">📝 Admission Form</h1>
+
+            <section className="flex justify-start w-full">
+                <div className="bg-white rounded-xl shadow-lg p-8 w-full  border border-gray-200">
 
                     <form className="flex flex-col gap-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

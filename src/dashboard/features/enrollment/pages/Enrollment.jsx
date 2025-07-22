@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import DashboardLayout from "@/dashboard/components/DashboardLayout"
-import { Button } from "@/components/ui/button"
-
+import SchoolCampus from "../../admission/components/dropdowns/SchoolCampus"
+import AcademicYear from "../../admission/components/dropdowns/AcademicYear"
+import AcademicProgram from "../../admission/components/dropdowns/AcademicProgram"
 const Enrollment = () => {
     // Sample state to hold enrolled students
     const [students, setStudents] = useState([])
@@ -27,60 +28,33 @@ const Enrollment = () => {
 
     return (
         <DashboardLayout>
-            <h1 className="text-2xl font-bold mb-6">📚 Enrollment</h1>
+            <h1>📚 Enrollment</h1>
 
-            {/* Add Enrollment Button */}
-            <div className="mb-4 flex justify-end">
-                <Button onClick={handleAddEnrollment}>➕ Add Enrollment</Button>
+            <div className="grid md:grid-cols-2 gap-6">
+                {/* Left side: Inputs */}
+                <div className="flex flex-col gap-4">
+                    <input type="text" placeholder="Student Name" className="border p-2 rounded" />
+                    <SchoolCampus />
+                    <AcademicYear />
+                    <AcademicProgram />
+                </div>
+
+                {/* Right side: Subjects */}
+                <div>
+                    <h2 className="font-bold mb-2">Select Subjects</h2>
+                    <div className="border rounded p-4 space-y-2">
+                        <label><input type="checkbox" /> IT101 - Intro to Computing</label><br />
+                        <label><input type="checkbox" /> IT102 - Programming 1</label><br />
+                        <label><input type="checkbox" /> IT103 - Web Development</label>
+                    </div>
+                </div>
             </div>
 
-            {/* Enrollment Table */}
-            <div className="overflow-x-auto bg-white rounded-lg shadow-md">
-                <table className="min-w-full text-left border-collapse">
-                    <thead className="bg-gray-100 border-b">
-                        <tr>
-                            <th className="py-3 px-4">#</th>
-                            <th className="py-3 px-4">Student Name</th>
-                            <th className="py-3 px-4">Course</th>
-                            <th className="py-3 px-4">Year Level</th>
-                            <th className="py-3 px-4 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {students.length > 0 ? (
-                            students.map((s, index) => (
-                                <tr key={s.id} className="border-b hover:bg-gray-50">
-                                    <td className="py-2 px-4">{index + 1}</td>
-                                    <td className="py-2 px-4">{s.name}</td>
-                                    <td className="py-2 px-4">{s.course}</td>
-                                    <td className="py-2 px-4">{s.year}</td>
-                                    <td className="py-2 px-4 text-center">
-                                        <Button
-                                            variant="secondary"
-                                            className="mr-2"
-                                            onClick={() => alert(`Edit ${s.name}`)}
-                                        >
-                                            Edit
-                                        </Button>
-                                        <Button
-                                            variant="destructive"
-                                            onClick={() => alert(`Delete ${s.name}`)}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="5" className="py-4 px-4 text-center text-gray-500">
-                                    No enrollment records found.
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+            {/* Summary and Enroll */}
+            <div className="mt-6 flex justify-end">
+                <button className="bg-blue-600 text-white px-6 py-2 rounded">Confirm Enrollment</button>
             </div>
+
         </DashboardLayout>
     )
 }
