@@ -5,15 +5,18 @@ import { useRoutes } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
 import Admission from '../dashboard/features/admission/pages/Admission'
 import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
-
+import GoogleCallBack from '../auth/google/GoogleCallback'
+import Help from '../dashboard/features/help/pages/Help'
 const AppRoutes = () => {
     const routes = useRoutes([
         {
             path: '/',
             element: <Login />
         },
-
-
+        {
+            path: '/auth/google/callback',
+            element: <GoogleCallBack />
+        },
         {
             path: '/register/personal-information',
             element: <RegisterTwo />
@@ -29,6 +32,10 @@ const AppRoutes = () => {
         {
             path: '/dashboard/enrollment',
             element: <Enrollment />
+        },
+        {
+            path: '/dashboard/help',
+            element: <Help />
         }
     ])
     return routes;

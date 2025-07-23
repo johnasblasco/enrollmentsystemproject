@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
-import { LayoutDashboard, BookMarked, BookUser, Menu, House } from 'lucide-react';
+import { LayoutDashboard, BookMarked, BookUser, Menu, House, MessageCircleQuestionMark, ChevronDown } from 'lucide-react';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -10,6 +10,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+
+
 
 const DashboardLayout = ({ children }) => {
     const navigate = useNavigate()
@@ -36,7 +38,10 @@ const DashboardLayout = ({ children }) => {
             setSection("dashboard > admission")
         } else if (path.startsWith("/dashboard/enrollment")) {
             setSection("dashboard > enrollment")
-        } else {
+        } else if (path.startsWith("/dashboard/help")) {
+            setSection("dashboard > help")
+        }
+        else {
             setSection("dashboard")
         }
     }, [location.pathname])
@@ -64,18 +69,25 @@ const DashboardLayout = ({ children }) => {
 
                 {/* Navigation */}
                 <nav className="flex flex-col gap-3 flex-grow text-sm">
-                    <Link to="/dashboard" className="hover:bg-gray-800 p-2 rounded flex items-center gap-2">
+
+                    <Link to="/dashboard" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <LayoutDashboard size={20} />
                         {!collapsed && "Dashboard"}
                     </Link>
-                    <Link to="/dashboard/admission" className="hover:bg-gray-800 p-2 rounded flex items-center gap-2">
+                    <Link to="/dashboard/admission" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookMarked size={20} />
                         {!collapsed && "Admissions"}
                     </Link>
-                    <Link to="/dashboard/enrollment" className="hover:bg-gray-800 p-2 rounded flex items-center gap-2">
+
+                    <Link to="/dashboard/enrollment" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookUser size={20} />
                         {!collapsed && "Enrollments"}
                     </Link>
+                    <Link to="/dashboard/help" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                        <MessageCircleQuestionMark size={20} />
+                        {!collapsed && "Help"}
+                    </Link>
+
                 </nav>
 
             </aside>
@@ -96,7 +108,7 @@ const DashboardLayout = ({ children }) => {
                             />
                         </DropdownMenuTrigger>
 
-                        <DropdownMenuContent className="relative left-0 w-46">
+                        <DropdownMenuContent className="relative right-16 w-46">
                             <DropdownMenuSeparator />
                             <DropdownMenuLabel>Johnas Blasco</DropdownMenuLabel>
                             <DropdownMenuItem>Profile</DropdownMenuItem>

@@ -41,13 +41,12 @@ const Classifications = () => {
                             className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                         >
                             <option value="">Please select</option>
-                            <option value="JM">University Academic Extension Programs</option>
-                            <option value="SRV">Regular In-Campus</option>
-                            <option value="JH">Pure Online/Modular</option>
-                            <option value="BBK">Freshman</option>
-                            <option value="AK">Transferee</option>
-                            <option value="BG">Cross-Enrollee</option>
-                            <option value="EC">Returnee</option>
+                            <option value="1">Level 1</option>
+                            <option value="2">level 2</option>
+                            <option value="3">level 3</option>
+                            <option value="4">level 4</option>
+                            <option value="5">level 5</option>
+                            <option value="6">level 6</option>
                         </select>
                     </label>
                 </div>
