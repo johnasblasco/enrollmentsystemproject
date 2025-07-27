@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react"
 import DashboardLayout from "@/dashboard/components/DashboardLayout"
-import SchoolCampus from "../../admission/components/dropdowns/SchoolCampus"
-import AcademicYear from "../../admission/components/dropdowns/AcademicYear"
-import AcademicProgram from "../../admission/components/dropdowns/AcademicProgram"
 const Enrollment = () => {
     // Sample state to hold enrolled students
     const [students, setStudents] = useState([])
@@ -34,9 +31,7 @@ const Enrollment = () => {
                 {/* Left side: Inputs */}
                 <div className="flex flex-col gap-4">
                     <input type="text" placeholder="Student Name" className="border p-2 rounded" />
-                    <SchoolCampus />
-                    <AcademicYear />
-                    <AcademicProgram />
+
                 </div>
 
                 {/* Right side: Subjects */}

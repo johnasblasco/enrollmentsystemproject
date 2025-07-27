@@ -8,16 +8,15 @@ const DashboardHome = () => {
             <div className="grid gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Total Students</CardTitle>
+                        <CardTitle>Enrolled Units</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-3xl font-bold">1,230</p>
-                        <p className="text-sm text-muted-foreground">+12 this week</p>
                     </CardContent>
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Enrolled Today</CardTitle>
+                        <CardTitle>GWA This Semester</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <p className="text-3xl font-bold">58</p>
@@ -26,11 +25,11 @@ const DashboardHome = () => {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Pending Admissions</CardTitle>
+                        <CardTitle>Outstanding Balance</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-3xl font-bold">24</p>
-                        <p className="text-sm text-muted-foreground">Review required</p>
+                        <p className="text-3xl font-bold">11,224</p>
+                        <p className="text-sm text-muted-foreground">+12 this week</p>
                     </CardContent>
                 </Card>
             </div>

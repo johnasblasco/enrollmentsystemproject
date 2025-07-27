@@ -138,9 +138,9 @@ const RegisterTwo = () => {
         <div>
             <section className="flex flex-col gap-4 justify-center items-center py-16">
                 <form className="w-full max-w-4xl border border-gray-200 rounded-lg p-10 bg-white shadow-md space-y-6">
-                    <h2 className="text-2xl font-semibold text-center text-blue-900">
+                    <h1 className="text-3xl my-4 font-semibold text-center text-purple-600">
                         Personal Information
-                    </h2>
+                    </h1>
 
                     {/* Name */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -251,13 +251,13 @@ const RegisterTwo = () => {
 
                     {/* Buttons */}
                     <div className="flex justify-between pt-4 w-full">
-                        <Link to="/" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                        <Link to="/register" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
                             Previous
                         </Link>
                         <Link
                             type="button"
                             onClick={handleNext}
-                            className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                            className="px-6 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
                         >
                             Next
                         </Link>

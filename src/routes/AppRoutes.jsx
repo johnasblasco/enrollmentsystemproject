@@ -7,6 +7,7 @@ import Admission from '../dashboard/features/admission/pages/Admission'
 import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
 import GoogleCallBack from '../auth/google/GoogleCallback'
 import Help from '../dashboard/features/help/pages/Help'
+import RegisterOne from '../auth/pages/RegisterOne'
 const AppRoutes = () => {
     const routes = useRoutes([
         {
@@ -16,6 +17,10 @@ const AppRoutes = () => {
         {
             path: '/auth/google/callback',
             element: <GoogleCallBack />
+        },
+        {
+            path: '/register',
+            element: <RegisterOne />
         },
         {
             path: '/register/personal-information',

@@ -1,5 +1,4 @@
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { Button } from "@/components/ui/button"
 import { useState, useEffect } from "react"
 import { LayoutDashboard, BookMarked, BookUser, Menu, House, MessageCircleQuestionMark, ChevronDown } from 'lucide-react';
 import {
@@ -111,8 +110,8 @@ const DashboardLayout = ({ children }) => {
                         <DropdownMenuContent className="relative right-16 w-46">
                             <DropdownMenuSeparator />
                             <DropdownMenuLabel>Johnas Blasco</DropdownMenuLabel>
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
-                            <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
+                            <DropdownMenuItem className={"hover:cursor-pointer"}>Profile</DropdownMenuItem>
+                            <DropdownMenuItem className={"hover:cursor-pointer"} onClick={handleLogout}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
 
