@@ -10,7 +10,7 @@ import SeparatorOne from '../components/separator/SeparatorOne';
 import { Link } from 'react-router-dom';
 import { AdmissionContext } from '@/globalContexts/AdmissionContext';
 import swal from 'sweetalert2'
-const Admission = () => {
+const Admission = ({ onAdmit }) => {
     const { admissionData, setAdmissionData } = useContext(AdmissionContext);
     const [nextPage, setNextPage] = useState(false);
 
@@ -216,7 +216,7 @@ const Admission = () => {
                                 Back
                             </button>
                             <button
-
+                                onClick={() => onAdmit()}
                                 type="submit"
                                 className="hover: cursor-pointer px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                             >
