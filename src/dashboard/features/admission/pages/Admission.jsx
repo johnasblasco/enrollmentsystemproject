@@ -14,11 +14,6 @@ const Admission = ({ onAdmit }) => {
     const { admissionData, setAdmissionData } = useContext(AdmissionContext);
     const [nextPage, setNextPage] = useState(false);
 
-    const testData = () => {
-        console.log("Admission Data:", admissionData);
-        setNextPage(true);
-    };
-
 
 
     return (
