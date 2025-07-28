@@ -12,13 +12,13 @@ const OauthCallback = () => {
         if (token && user) {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/dashboard');
+            navigate('/dashboard'); // Redirect after storing
         } else {
-            navigate('/');
+            navigate('/'); // Fallback
         }
     }, []);
 
-    return <p>Redirecting...</p>;
+    return <p className="text-center mt-10">Redirecting, please wait...</p>;
 };
 
 export default OauthCallback;

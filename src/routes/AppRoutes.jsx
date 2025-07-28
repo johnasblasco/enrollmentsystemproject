@@ -3,9 +3,9 @@ import Login from '../auth/pages/Login'
 import RegisterTwo from '../auth/pages/RegisterTwo'
 import { useRoutes } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
-import Admission from '../dashboard/features/admission/pages/Admission'
-import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
-import Help from '../dashboard/features/help/pages/Help'
+import AdmissionPage from '../dashboard/pages/AdmissionPage'
+import EnrollmentPage from '../dashboard/pages/EnrollmentPage'
+import HelpPages from '../dashboard/pages/HelpPage'
 import Verified from '../auth/pages/Verified'
 import OauthCallBack from '../auth/google/OauthCallback'
 
@@ -32,16 +32,16 @@ const AppRoutes = () => {
             element: <Dashboard />
         },
         {
+            path: '/dashboard/help',
+            element: <HelpPages />
+        },
+        {
             path: '/dashboard/admission',
-            element: <Admission />
+            element: <AdmissionPage />
         },
         {
             path: '/dashboard/enrollment',
-            element: <Enrollment />
-        },
-        {
-            path: '/dashboard/help',
-            element: <Help />
+            element: <EnrollmentPage />
         }
     ])
     return routes;

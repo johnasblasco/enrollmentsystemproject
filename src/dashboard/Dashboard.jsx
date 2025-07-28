@@ -20,7 +20,7 @@ const DashboardHome = () => {
     return (
         <DashboardLayout>
             <h1 className="text-3xl font-bold mb-6">📊 Dashboard Overview</h1>
-            {!isAdmitted && (
+            {isAdmitted && (
                 <div className="fixed z-100  bottom-0 left-0 right-0 w-full h-screen flex items-center justify-center bg-neutral-500/50">
                     <Admission />
                 </div>

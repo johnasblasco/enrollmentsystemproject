@@ -161,6 +161,7 @@ const Login = () => {
 
                     <div className="mt-6 flex flex-col items-center space-y-3">
                         <button
+                            type="button"
                             onClick={() => {
                                 window.location.href = 'https://server.laravel.bpc-bsis4d.com/public/api/login/google';
                             }}
@@ -169,6 +170,7 @@ const Login = () => {
                             <img src="/google.png" alt="Google" className="h-5 w-5" />
                             <span>Continue with Google</span>
                         </button>
+
 
                         <button
                             onClick={() => window.open('https://server.laravel.bpc-bsis4d.com/public/api/auth/github/redirect', '_blank')} // Replace with actual route
