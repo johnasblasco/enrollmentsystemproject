@@ -22,7 +22,8 @@ const DashboardHome = () => {
             <h1 className="text-3xl font-bold mb-6">📊 Dashboard Overview</h1>
             {!isAdmitted && (
                 <div className="fixed z-100  bottom-0 left-0 right-0 w-full h-screen flex items-center justify-center bg-neutral-500/50">
-                    <Admission />
+                    <Admission onAdmit={() => setIsAdmitted(true)} />
+
                 </div>
             )}
             <div className="grid gap-4 md:grid-cols-3">
