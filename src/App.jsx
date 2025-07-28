@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import AppRoutes from './routes/AppRoutes'
+
 import { RegisterProvider } from './auth/contexts/RegisterContext'
+import { AdmissionProvider } from './globalContexts/AdmissionContext'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 const App = () => {
@@ -11,9 +13,11 @@ const App = () => {
   }, [])
   return (
     <>
-      <RegisterProvider>
-        <AppRoutes />
-      </RegisterProvider>
+      <AdmissionProvider>
+        <RegisterProvider>
+          <AppRoutes />
+        </RegisterProvider>
+      </AdmissionProvider>
     </>
   )
 }

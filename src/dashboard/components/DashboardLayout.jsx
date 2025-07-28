@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { LayoutDashboard, BookMarked, BookUser, Menu, House, MessageCircleQuestionMark, ChevronDown } from 'lucide-react';
 import {
     DropdownMenu,
@@ -10,9 +10,20 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+import { RegisterContext } from "@/auth/contexts/RegisterContext";
+
 
 
 const DashboardLayout = ({ children }) => {
+
+    const { registerData } = useContext(RegisterContext);
+
+    useEffect(() => {
+        console.log("Register Data to layout:", registerData);
+    }, []);
+
+
+
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -96,7 +107,7 @@ const DashboardLayout = ({ children }) => {
                 {/* Header */}
 
 
-                <header className={`fixed left-0 right-0 h-16 bg-white shadow flex items-center ${!collapsed ? 'justify-end-safe' : 'justify-between'} px-6 z-40`} style={{ marginLeft: collapsed ? '5rem' : '16rem' }}>
+                <header className={`z-0 text-white fixed left-0 right-0 h-16 bg-gray-900 shadow flex items-center ${!collapsed ? 'justify-end-safe' : 'justify-between'} px-6 z-40`} style={{ marginLeft: collapsed ? '5rem' : '16rem' }}>
                     {collapsed && <h1 className="font-bold text-xl">SNL University</h1>}
                     <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
                         <DropdownMenuTrigger>
@@ -109,7 +120,7 @@ const DashboardLayout = ({ children }) => {
 
                         <DropdownMenuContent className="relative right-16 w-46">
                             <DropdownMenuSeparator />
-                            <DropdownMenuLabel>Johnas Blasco</DropdownMenuLabel>
+                            <DropdownMenuLabel>{registerData.surname}</DropdownMenuLabel>
                             <DropdownMenuItem className={"hover:cursor-pointer"}>Profile</DropdownMenuItem>
                             <DropdownMenuItem className={"hover:cursor-pointer"} onClick={handleLogout}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>

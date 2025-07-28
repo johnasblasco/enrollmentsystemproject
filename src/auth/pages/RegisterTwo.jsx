@@ -2,52 +2,47 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+const initialPayload = {
+    user_type: '',
+    surname: '',
+    given_name: '',
+    middle_name: '',
+    suffix: '',
+    date_of_birth: '',
+    place_of_birth: '',
+    gender: '',
+    civil_status: '',
+    is_indigenous: '',
+    is_insurance_member: '',
+    street_address: '',
+    province: '',
+    city: '',
+    barangay: '',
+    nationality: '',
+    religion: '',
+    ethnic_affiliation: '',
+    telephone_number: '',
+    mobile_number: '',
+    email: '',
+    is_4ps_member: '',
+    is_vaccinated: '',
+    is_ip: '',
+    is_admitted: 'false',
+}
+
 const RegisterTwo = () => {
     const navigate = useNavigate()
-    const [registerData, setRegisterData] = useState({})
-
-    // name
-    const [surname, setSurname] = useState('')
-    const [givenName, setGivenName] = useState('')
-    const [middleName, setMiddleName] = useState('')
-    const [suffix, setSuffix] = useState('')
-
-    // birth
-    const [dob, setDob] = useState('')
-    const [pob, setPob] = useState('')
-
-    // other selects
-    const [gender, setGender] = useState('')
-    const [civilStatus, setCivilStatus] = useState('')
-    const [indigenous, setIndigenous] = useState('')
-    const [pwd, setPwd] = useState('')
-    const [houseStreet, setHouseStreet] = useState('')
-
-    // location
-    const [province, setProvince] = useState('')
-    const [city, setCity] = useState('')
-    const [barangay, setBarangay] = useState('')
-
-    // contact
-    const [nationality, setNationality] = useState('')
-    const [religion, setReligion] = useState('')
-    const [ethnic, setEthnic] = useState('')
-    const [tel, setTel] = useState('')
-    const [mobile, setMobile] = useState('')
-    const [email, setEmail] = useState('')
-
-    // yes/no
-    const [is4ps, setIs4ps] = useState('')
-    const [vaccinated, setVaccinated] = useState('')
-    const [isIp, setIsIp] = useState('')
+    const [payload, setPayload] = useState(initialPayload)
 
     // collections
     const [provinces, setProvinces] = useState([])
     const [cities, setCities] = useState([])
     const [barangays, setBarangays] = useState([])
 
-    const [selectedProvince, setSelectedProvince] = useState('')
-    const [selectedCity, setSelectedCity] = useState('')
+    // get selected province, city, barangay codes
+    const [selectedProvinceCode, setSelectedProvinceCode] = useState('');
+    const [selectedCityCode, setSelectedCityCode] = useState('');
+    const [selectedBarangayCode, setSelectedBarangayCode] = useState('');
 
     // fetch provinces
     useEffect(() => {
@@ -64,14 +59,14 @@ const RegisterTwo = () => {
 
     // fetch cities
     useEffect(() => {
-        if (!selectedProvince) {
+        if (!selectedProvinceCode) {
             setCities([])
             return
         }
         const fetchCities = async () => {
             try {
                 const response = await axios.get(
-                    `https://psgc.gitlab.io/api/provinces/${selectedProvince}/cities-municipalities/`
+                    `https://psgc.gitlab.io/api/provinces/${selectedProvinceCode}/cities-municipalities/`
                 )
                 setCities(response.data)
             } catch (error) {
@@ -79,18 +74,18 @@ const RegisterTwo = () => {
             }
         }
         fetchCities()
-    }, [selectedProvince])
+    }, [selectedProvinceCode])
 
     // fetch barangays
     useEffect(() => {
-        if (!selectedCity) {
+        if (!selectedCityCode) {
             setBarangays([])
             return
         }
         const fetchBarangays = async () => {
             try {
                 const response = await axios.get(
-                    `https://psgc.gitlab.io/api/cities-municipalities/${selectedCity}/barangays/`
+                    `https://psgc.gitlab.io/api/cities-municipalities/${selectedCityCode}/barangays/`
                 )
                 setBarangays(response.data)
             } catch (error) {
@@ -98,41 +93,27 @@ const RegisterTwo = () => {
             }
         }
         fetchBarangays()
-    }, [selectedCity])
-
+    }, [selectedCityCode])
     // submit
     const handleNext = () => {
         console.log("CLICKED!");
-        const payload = {
-            surname,
-            givenName,
-            middleName,
-            suffix,
-            dob,
-            pob,
-            gender,
-            civilStatus,
-            indigenous,
-            pwd,
-            houseStreet,
-            province: selectedProvince,
-            city: selectedCity,
-            barangay,
-            nationality,
-            religion,
-            ethnic,
-            tel,
-            mobile,
-            email,
-            is4ps,
-            vaccinated,
-            isIp,
-        }
-
-        console.log('Submitted Payload:', payload)
-        setRegisterData(payload)
-        // navigate('/next-page') // optional
+        console.log('Submitted Payload:', payload);
+        axios.post('https://server.laravel.bpc-bsis4d.com/public/api/createuser', payload)
+            .then(res => {
+                console.log('Success:', res.data);
+                navigate('/register/verified', { state: { user: res.data.user } }) // Navigate to verified page with user data
+            })
+            .catch(err => {
+                if (err.response) {
+                    console.error('API Error:', err.response.data);
+                    alert(JSON.stringify(err.response.data.errors || err.response.data));
+                } else {
+                    console.error('Unknown Error:', err);
+                }
+            });
     }
+
+
 
     return (
         <div>
@@ -144,37 +125,37 @@ const RegisterTwo = () => {
 
                     {/* Name */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <InputWithLabel label="Surname" required value={surname} onChange={e => setSurname(e.target.value)} />
-                        <InputWithLabel label="Given name" required value={givenName} onChange={e => setGivenName(e.target.value)} />
-                        <InputWithLabel label="Middle name" value={middleName} onChange={e => setMiddleName(e.target.value)} />
-                        <InputWithLabel label="Suffix" value={suffix} onChange={e => setSuffix(e.target.value)} />
+                        <InputWithLabel label="Surname" required value={payload.surname} onChange={e => setPayload(p => ({ ...p, surname: e.target.value }))} />
+                        <InputWithLabel label="Given name" required value={payload.given_name} onChange={e => setPayload(p => ({ ...p, given_name: e.target.value }))} />
+                        <InputWithLabel label="Middle name" value={payload.middle_name} onChange={e => setPayload(p => ({ ...p, middle_name: e.target.value }))} />
+                        <InputWithLabel label="Suffix" value={payload.suffix} onChange={e => setPayload(p => ({ ...p, suffix: e.target.value }))} />
                     </div>
 
                     {/* DOB / POB */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <InputWithLabel label="Date of Birth" type="date" required value={dob} onChange={e => setDob(e.target.value)} />
-                        <InputWithLabel label="Place of Birth" required value={pob} onChange={e => setPob(e.target.value)} />
+                        <InputWithLabel label="Date of Birth" type="date" required value={payload.date_of_birth} onChange={e => setPayload(p => ({ ...p, date_of_birth: e.target.value }))} />
+                        <InputWithLabel label="Place of Birth" required value={payload.place_of_birth} onChange={e => setPayload(p => ({ ...p, place_of_birth: e.target.value }))} />
                     </div>
 
                     {/* Selects */}
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <SelectWithLabel label="Gender" required value={gender} onChange={e => setGender(e.target.value)} options={[
+                        <SelectWithLabel label="Gender" required value={payload.gender} onChange={e => setPayload(p => ({ ...p, gender: e.target.value }))} options={[
                             { value: 'male', label: 'Male' },
                             { value: 'female', label: 'Female' },
                             { value: 'other', label: 'Other' },
                         ]} />
-                        <SelectWithLabel label="Civil Status" required value={civilStatus} onChange={e => setCivilStatus(e.target.value)} options={[
+                        <SelectWithLabel label="Civil Status" required value={payload.civil_status} onChange={e => setPayload(p => ({ ...p, civil_status: e.target.value }))} options={[
                             { value: 'single', label: 'Single' },
                             { value: 'married', label: 'Married' },
                             { value: 'widowed', label: 'Widowed' },
                             { value: 'separated', label: 'Separated' },
                             { value: 'divorced', label: 'Divorced' },
                         ]} />
-                        <SelectWithLabel label="Indigenous Community" value={indigenous} onChange={e => setIndigenous(e.target.value)} options={[
+                        <SelectWithLabel label="Indigenous Community" value={payload.is_indigenous} onChange={e => setPayload(p => ({ ...p, is_indigenous: e.target.value }))} options={[
                             { value: 'yes', label: 'Yes' },
                             { value: 'no', label: 'No' },
                         ]} />
-                        <SelectWithLabel label="PWD" value={pwd} onChange={e => setPwd(e.target.value)} options={[
+                        <SelectWithLabel label="PWD" value={payload.is_insurance_member} onChange={e => setPayload(p => ({ ...p, is_insurance_member: e.target.value }))} options={[
                             { value: 'yes', label: 'Yes' },
                             { value: 'no', label: 'No' },
                         ]} />
@@ -187,39 +168,75 @@ const RegisterTwo = () => {
                         </label>
                         <input
                             type="text"
-                            value={houseStreet}
-                            onChange={e => setHouseStreet(e.target.value)}
-                            className={`w-full border rounded p-2 ${!houseStreet ? 'border-red-500' : 'border-gray-300'}`}
+                            value={payload.street_address}
+                            onChange={e => setPayload(p => ({ ...p, street_address: e.target.value }))}
+                            className={`w-full border rounded p-2 ${!payload.street_address ? 'border-red-500' : 'border-gray-300'}`}
                         />
                     </div>
 
                     {/* Province City Barangay */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <SelectWithLabel label="Province" required value={selectedProvince} onChange={e => {
-                            setSelectedProvince(e.target.value)
-                            setSelectedCity('')
-                            setBarangay('')
-                        }} options={provinces.map(p => ({ value: p.code, label: p.name }))} />
-                        <SelectWithLabel label="City" required value={selectedCity} onChange={e => {
-                            setSelectedCity(e.target.value)
-                            setBarangay('')
-                        }} options={cities.map(c => ({ value: c.code, label: c.name }))} />
-                        <SelectWithLabel label="Barangay" required value={barangay} onChange={e => setBarangay(e.target.value)} options={barangays.map(b => ({ value: b.code, label: b.name }))} />
+                        <SelectWithLabel
+                            label="Province"
+                            required
+                            value={selectedProvinceCode}
+                            onChange={e => {
+                                const selected = provinces.find(p => p.code === e.target.value)
+                                setSelectedProvinceCode(e.target.value)
+                                setSelectedCityCode('')
+                                setPayload(p => ({
+                                    ...p,
+                                    province: selected ? selected.name : '',
+                                    city: '',
+                                    barangay: ''
+                                }))
+                            }}
+                            options={provinces.map(p => ({ value: p.code, label: p.name }))}
+                        />
+                        <SelectWithLabel
+                            label="City"
+                            required
+                            value={selectedCityCode}
+                            onChange={e => {
+                                const selected = cities.find(c => c.code === e.target.value)
+                                setSelectedCityCode(e.target.value)
+                                setPayload(p => ({
+                                    ...p,
+                                    city: selected ? selected.name : '',
+                                    barangay: ''
+                                }))
+                            }}
+                            options={cities.map(c => ({ value: c.code, label: c.name }))}
+                        />
+                        <SelectWithLabel
+                            label="Barangay"
+                            required
+                            value={selectedBarangayCode}
+                            onChange={e => {
+                                const selected = barangays.find(b => b.code === e.target.value)
+                                setSelectedBarangayCode(e.target.value)
+                                setPayload(p => ({
+                                    ...p,
+                                    barangay: selected ? selected.name : ''
+                                }))
+                            }}
+                            options={barangays.map(b => ({ value: b.code, label: b.name }))}
+                        />
                     </div>
 
                     {/* Contact */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <SelectWithLabel label="Nationality" value={nationality} onChange={e => setNationality(e.target.value)} options={[
+                        <SelectWithLabel label="Nationality" value={payload.nationality} onChange={e => setPayload(p => ({ ...p, nationality: e.target.value }))} options={[
                             { value: 'Filipino', label: 'Filipino' },
                             { value: 'Other', label: 'Other' },
                         ]} />
-                        <SelectWithLabel label="Religion" value={religion} onChange={e => setReligion(e.target.value)} options={[
+                        <SelectWithLabel label="Religion" value={payload.religion} onChange={e => setPayload(p => ({ ...p, religion: e.target.value }))} options={[
                             { value: 'Catholic', label: 'Catholic' },
                             { value: 'Protestant', label: 'Protestant' },
                             { value: 'Muslim', label: 'Muslim' },
                             { value: 'Other', label: 'Other' },
                         ]} />
-                        <SelectWithLabel label="Ethnic Affiliation" value={ethnic} onChange={e => setEthnic(e.target.value)} options={[
+                        <SelectWithLabel label="Ethnic Affiliation" value={payload.ethnic_affiliation} onChange={e => setPayload(p => ({ ...p, ethnic_affiliation: e.target.value }))} options={[
                             { value: 'Aeta', label: 'Aeta' },
                             { value: 'Bontoc', label: 'Bontoc' },
                             { value: 'Bicolano', label: 'Bicolano' },
@@ -228,22 +245,22 @@ const RegisterTwo = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <InputWithLabel label="Telephone Number" value={tel} onChange={e => setTel(e.target.value)} />
-                        <InputWithLabel label="Mobile Number" required value={mobile} onChange={e => setMobile(e.target.value)} />
-                        <InputWithLabel label="Email" type="email" required value={email} onChange={e => setEmail(e.target.value)} />
+                        <InputWithLabel label="Telephone Number" value={payload.telephone_number} onChange={e => setPayload(p => ({ ...p, telephone_number: e.target.value }))} />
+                        <InputWithLabel label="Mobile Number" required value={payload.mobile_number} onChange={e => setPayload(p => ({ ...p, mobile_number: e.target.value }))} />
+                        <InputWithLabel label="Email" type="email" required value={payload.email} onChange={e => setPayload(p => ({ ...p, email: e.target.value }))} />
                     </div>
 
                     {/* Yes/No */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <SelectWithLabel label="Are you a member of 4Ps?" value={is4ps} onChange={e => setIs4ps(e.target.value)} options={[
+                        <SelectWithLabel label="Are you a member of 4Ps?" value={payload.is_4ps_member} onChange={e => setPayload(p => ({ ...p, is_4ps_member: e.target.value }))} options={[
                             { value: 'Yes', label: 'Yes' },
                             { value: 'No', label: 'No' },
                         ]} />
-                        <SelectWithLabel label="Vaccination Status" value={vaccinated} onChange={e => setVaccinated(e.target.value)} options={[
+                        <SelectWithLabel label="Vaccination Status" value={payload.is_vaccinated} onChange={e => setPayload(p => ({ ...p, is_vaccinated: e.target.value }))} options={[
                             { value: 'Yes', label: 'Yes' },
                             { value: 'No', label: 'No' },
                         ]} />
-                        <SelectWithLabel label="IP / Indigenous group?" value={isIp} onChange={e => setIsIp(e.target.value)} options={[
+                        <SelectWithLabel label="IP / Indigenous group?" value={payload.is_ip} onChange={e => setPayload(p => ({ ...p, is_ip: e.target.value }))} options={[
                             { value: 'Yes', label: 'Yes' },
                             { value: 'No', label: 'No' },
                         ]} />
@@ -251,7 +268,7 @@ const RegisterTwo = () => {
 
                     {/* Buttons */}
                     <div className="flex justify-between pt-4 w-full">
-                        <Link to="/register" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                        <Link to="/" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
                             Previous
                         </Link>
                         <Link

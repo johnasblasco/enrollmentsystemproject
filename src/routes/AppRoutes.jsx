@@ -5,9 +5,9 @@ import { useRoutes } from 'react-router-dom'
 import Dashboard from '../dashboard/Dashboard'
 import Admission from '../dashboard/features/admission/pages/Admission'
 import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
-import GoogleCallBack from '../auth/google/GoogleCallback'
 import Help from '../dashboard/features/help/pages/Help'
-import RegisterOne from '../auth/pages/RegisterOne'
+import Verified from '../auth/pages/Verified'
+
 const AppRoutes = () => {
     const routes = useRoutes([
         {
@@ -15,16 +15,12 @@ const AppRoutes = () => {
             element: <Login />
         },
         {
-            path: '/auth/google/callback',
-            element: <GoogleCallBack />
-        },
-        {
-            path: '/register',
-            element: <RegisterOne />
-        },
-        {
             path: '/register/personal-information',
             element: <RegisterTwo />
+        },
+        {
+            path: '/register/verified',
+            element: <Verified />
         },
         {
             path: '/dashboard',

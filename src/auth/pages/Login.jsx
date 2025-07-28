@@ -1,15 +1,17 @@
 
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { RegisterContext } from "@/auth/contexts/RegisterContext"
 
 const Login = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false);
 
+    const { registerData, setRegisterData } = useContext(RegisterContext);
 
     const navigate = useNavigate()
 
@@ -43,16 +45,23 @@ const Login = () => {
                 },
             });
 
-            const data = response.data;
+            //set data to context   
+            const data = response.data
+
+
+
             if (data.isSuccess) {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('user', JSON.stringify(data.user))
 
                 await Swal.fire({
                     title: "Account Matched!",
                     icon: "success",
                     draggable: true
                 });
+
+                console.log("WHAWAHAWH: ", data.user);
+                setRegisterData(data.user)
                 navigate('/dashboard');
             } else {
                 await Swal.fire({
@@ -171,12 +180,12 @@ const Login = () => {
                     <div className="flex items-center justify-between">
                         <p className="text-sm text-gray-600">
                             No account yet?
-                            <Link to={"/register"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
+                            <Link to={"/register/personal-information"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
                         </p>
 
                         <p className="text-sm text-gray-600">
                             Get your Account here
-                            <Link to={"/register"} className="underline text-blue-500"><br />forgot password?</Link>
+                            <Link to={"/"} className="underline text-blue-500"><br />forgot password?</Link>
                         </p>
 
                     </div>
