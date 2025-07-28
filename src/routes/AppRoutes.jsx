@@ -8,6 +8,7 @@ import EnrollmentPage from '../dashboard/pages/EnrollmentPage'
 import HelpPages from '../dashboard/pages/HelpPage'
 import Verified from '../auth/pages/Verified'
 import OauthCallBack from '../auth/google/OauthCallback'
+import OAuthCallback2 from '../auth/github/OAuthCallback2'
 
 const AppRoutes = () => {
     const routes = useRoutes([
@@ -18,6 +19,10 @@ const AppRoutes = () => {
         {
             path: '/oauth-callback',
             element: <OauthCallBack />
+        },
+        {
+            path: '/oauth-callback2',
+            element: <OAuthCallback2 />
         },
         {
             path: '/register/personal-information',
