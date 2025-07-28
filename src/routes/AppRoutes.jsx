@@ -7,12 +7,17 @@ import Admission from '../dashboard/features/admission/pages/Admission'
 import Enrollment from '../dashboard/features/enrollment/pages/Enrollment'
 import Help from '../dashboard/features/help/pages/Help'
 import Verified from '../auth/pages/Verified'
+import OauthCallBack from '../auth/google/OauthCallback'
 
 const AppRoutes = () => {
     const routes = useRoutes([
         {
             path: '/',
             element: <Login />
+        },
+        {
+            path: '/oauth-callback',
+            element: <OauthCallBack />
         },
         {
             path: '/register/personal-information',

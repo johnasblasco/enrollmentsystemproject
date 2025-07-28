@@ -161,7 +161,9 @@ const Login = () => {
 
                     <div className="mt-6 flex flex-col items-center space-y-3">
                         <button
-                            onClick={() => window.open('https://server.laravel.bpc-bsis4d.com/public/api/login/google', '_blank')}// Replace with actual route
+                            onClick={() => {
+                                window.location.href = 'https://server.laravel.bpc-bsis4d.com/public/api/login/google';
+                            }}
                             className="hover:cursor-pointer w-full max-w-md flex items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                         >
                             <img src="/google.png" alt="Google" className="h-5 w-5" />
