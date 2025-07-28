@@ -1,27 +1,31 @@
-// src/pages/OAuthCallback.jsx
-import { useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const OAuthCallback2 = () => {
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const token = searchParams.get('token');
-        const user = searchParams.get('user');
+        const params = new URLSearchParams(window.location.search)
+        const token = params.get('token')
+        const user = params.get('user')
 
         if (token && user) {
-            // Save token and user in localStorage or context
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', user);
+            try {
+                const userData = JSON.parse(decodeURIComponent(user))
 
-            navigate('/dashboard'); // or whatever your route is
+                localStorage.setItem('token', token)
+                localStorage.setItem('user', JSON.stringify(userData))
+
+                navigate('/dashboard') // or wherever you want to redirect
+            } catch (error) {
+                console.error('Failed to parse user', error)
+            }
         } else {
-            navigate('/login'); // fallback if something went wrong
+            navigate('/') // fallback
         }
-    }, [navigate, searchParams]);
+    }, [navigate])
 
-    return <div className="text-center p-10">Logging in via GitHub...</div>;
-};
+    return <div className="p-5 text-center">Logging you in...</div>
+}
 
-export default OAuthCallback2;
+export default OAuthCallback2

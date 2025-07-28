@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { RegisterContext } from "@/auth/contexts/RegisterContext"
 
 const Login = () => {
+
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false);
@@ -173,7 +174,10 @@ const Login = () => {
 
 
                         <button
-                            onClick={() => window.open('https://server.laravel.bpc-bsis4d.com/public/api/auth/github/redirect', '_blank')} // Replace with actual route
+                            onClick={() => window.open(
+                                'https://server.laravel.bpc-bsis4d.com/public/api/auth/github/redirect',
+                                '_self'
+                            )}
                             className="hover:cursor-pointer w-full max-w-md flex items-center justify-center gap-3 rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
                         >
                             <img src="/github.png" alt="github" className="  h-5 w-5" />
