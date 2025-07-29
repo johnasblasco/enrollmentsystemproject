@@ -82,7 +82,6 @@ const Admission = ({ onAdmit }) => {
                             </Link>
                             <button
                                 type="button"
-                                onClick={testData}
                                 className="px-6 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
                             >
                                 Next
