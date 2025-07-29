@@ -11,6 +11,8 @@ import HelpPages from '../student_dashboard/pages/HelpPage';
 import AdmissionPage from '../student_dashboard/pages/AdmissionPage';
 import EnrollmentPage from '../student_dashboard/pages/EnrollmentPage';
 import AdminDashboard from '../admin_dashboard/AdminDashboard';
+import GradesPage from '../student_dashboard/pages/GradesPage';
+import ProfilePage from '../student_dashboard/pages/ProfilePage';
 
 
 
@@ -56,7 +58,22 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             )
         },
-
+        {
+            path: '/student_dashboard/grades',
+            element: (
+                <ProtectedRoute allowedRoles={['student']}>
+                    <GradesPage />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/student_dashboard/profile',
+            element: (
+                <ProtectedRoute allowedRoles={['student']}>
+                    <ProfilePage />
+                </ProtectedRoute>
+            )
+        },
         // Admin routes
         {
             path: '/admin/dashboard',

@@ -46,8 +46,11 @@ const DashboardLayout = ({ children }) => {
             setSection("student_dashboard > enrollment")
         } else if (path.startsWith("/student_dashboard/help")) {
             setSection("student_dashboard > help")
-        }
-        else {
+        } else if (path.startsWith("/student_dashboard/grades")) {
+            setSection("student_dashboard > grades")
+        } else if (path.startsWith("/student_dashboard/profile")) {
+            setSection("student_dashboard > profile")
+        } else {
             setSection("student_dashboard")
         }
     }, [location.pathname])
@@ -84,6 +87,11 @@ const DashboardLayout = ({ children }) => {
                         <BookMarked size={20} />
                         {!collapsed && "Admissions"}
                     </Link>
+                    <Link to="/student_dashboard/grades" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                        <BookMarked size={20} />
+                        {!collapsed && "Grades"}
+                    </Link>
+
 
                     <Link to="/student_dashboard/enrollment" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookUser size={20} />
@@ -107,17 +115,19 @@ const DashboardLayout = ({ children }) => {
                     {collapsed && <h1 className="font-bold text-xl">SNL University</h1>}
                     <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
                         <DropdownMenuTrigger>
+
                             <img
                                 src="https://via.placeholder.com/40"
                                 alt="Profile"
                                 className="mr-6 w-10 h-10 rounded-full border hover:cursor-pointer"
                             />
+
                         </DropdownMenuTrigger>
 
                         <DropdownMenuContent className="relative right-16 w-46">
                             <DropdownMenuSeparator />
                             <DropdownMenuLabel>{registerData.surname}</DropdownMenuLabel>
-                            <DropdownMenuItem className={"hover:cursor-pointer"}>Profile</DropdownMenuItem>
+                            <Link to="/student_dashboard/profile"><DropdownMenuItem className={"hover:cursor-pointer"}>Profile</DropdownMenuItem></Link>
                             <DropdownMenuItem className={"hover:cursor-pointer"} onClick={handleLogout}>Logout</DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
