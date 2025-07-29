@@ -7,13 +7,7 @@ import { RegisterContext } from "@/auth/contexts/RegisterContext"
 const DashboardHome = () => {
 
     const { registerData } = useContext(RegisterContext);
-    const [isAdmitted, setIsAdmitted] = useState(false);
-
-    useEffect(() => {
-        console.log("Register Data HEHEHEHHE:", registerData);
-        setIsAdmitted(registerData.isAdmitted);
-    }, []);
-
+    const [isAdmitted, setIsAdmitted] = useState(registerData.isAdmitted || false);
 
 
 

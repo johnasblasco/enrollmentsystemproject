@@ -18,10 +18,6 @@ const DashboardLayout = ({ children }) => {
 
     const { registerData } = useContext(RegisterContext);
 
-    useEffect(() => {
-        console.log("Register Data to layout:", registerData);
-    }, []);
-
 
 
     const navigate = useNavigate()

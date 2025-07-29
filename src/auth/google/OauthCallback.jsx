@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { RegisterContext } from '@/auth/contexts/RegisterContext';
 
 const OauthCallback = () => {
     const navigate = useNavigate();
+    const { setRegisterData } = useContext(RegisterContext); // ✅ Access context
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -12,9 +14,12 @@ const OauthCallback = () => {
         if (token && user) {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/dashboard'); // Redirect after storing
+
+            setRegisterData(user); // ✅ Store in global context
+            console.log("User data set in context:", user);
+            navigate('/dashboard');
         } else {
-            navigate('/'); // Fallback
+            navigate('/');
         }
     }, []);
 
