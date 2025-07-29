@@ -25,6 +25,7 @@ const Admission = ({ onAdmit }) => {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
+                            console.log("Form submitted");
                             setNextPage(true); // go to second page
                         }}
                         className="w-full md:max-w-5xl border border-gray-200 rounded-lg p-10 bg-white shadow-md space-y-6">
@@ -97,6 +98,7 @@ const Admission = ({ onAdmit }) => {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
+                            console.log("Form submitted 2");
                             console.log("Submitting data:", admissionData);
 
                             const token = localStorage.getItem("token");
