@@ -118,6 +118,7 @@ const Admission = ({ onAdmit }) => {
                                         icon: "success",
                                         confirmButtonText: "OK"
                                     });
+                                    onAdmit();
 
                                 })
                                 .catch((error) => {
