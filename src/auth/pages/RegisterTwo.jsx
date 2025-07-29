@@ -93,7 +93,6 @@ const RegisterTwo = () => {
                     icon: "success",
                     confirmButtonText: "OK"
                 });
-                onAdmit();
                 navigate('/', { replace: true }) // redirect to admission page
 
             })

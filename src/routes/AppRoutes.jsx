@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import Login from '../auth/pages/Login';
 import Register from '../auth/pages/Register';
 import RegisterTwo from '../auth/pages/RegisterTwo';
+import ForgotPassword from '../auth/pages/ForgotPassword';
 import Verified from '../auth/pages/Verified';
 import OauthCallBack from '../auth/google/OauthCallback';
 import OAuthCallback2 from '../auth/github/OAuthCallback2';
@@ -20,6 +21,7 @@ const AppRoutes = () => {
     const routes = useRoutes([
         { path: '/', element: <Login /> },
         { path: '/register', element: <Register /> },
+        { path: '/forgot-password', element: <ForgotPassword /> },
         { path: '/register/personal-information', element: <RegisterTwo /> },
         { path: '/register/verified', element: <Verified /> },
         { path: '/oauth-callback', element: <OauthCallBack /> },
