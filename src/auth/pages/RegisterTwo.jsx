@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import swal from 'sweetalert2'
 
 import { AdmissionContext } from '@/globalContexts/AdmissionContext'
 
@@ -262,9 +262,9 @@ const RegisterTwo = () => {
                         <Link
                             type="button"
                             onClick={handleNext}
-                            className="px-6 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                            className="hover: cursor-pointer px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700"
                         >
-                            Next
+                            Submit
                         </Link>
                     </div>
                 </form>
