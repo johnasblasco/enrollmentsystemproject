@@ -63,7 +63,7 @@ const Login = () => {
 
                 console.log("WHAWAHAWH: ", data.user);
                 setRegisterData(data.user)
-                navigate('/dashboard');
+                navigate('/student_dashboard');
             } else {
                 await Swal.fire({
                     title: "Invalid Credentials!",
