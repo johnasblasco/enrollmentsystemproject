@@ -3,6 +3,7 @@ import AppRoutes from './routes/AppRoutes'
 
 import { RegisterProvider } from './auth/contexts/RegisterContext'
 import { AdmissionProvider } from './globalContexts/AdmissionContext'
+import { AuthProvider } from './globalContexts/AuthContext'
 import Aos from 'aos'
 import 'aos/dist/aos.css'
 const App = () => {
@@ -13,11 +14,13 @@ const App = () => {
   }, [])
   return (
     <>
-      <AdmissionProvider>
-        <RegisterProvider>
-          <AppRoutes />
-        </RegisterProvider>
-      </AdmissionProvider>
+      <AuthProvider>
+        <AdmissionProvider>
+          <RegisterProvider>
+            <AppRoutes />
+          </RegisterProvider>
+        </AdmissionProvider>
+      </AuthProvider>
     </>
   )
 }

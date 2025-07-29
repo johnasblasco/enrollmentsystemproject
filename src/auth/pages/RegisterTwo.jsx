@@ -94,10 +94,17 @@ const RegisterTwo = () => {
                     confirmButtonText: "OK"
                 });
                 onAdmit();
+                navigate('/', { replace: true }) // redirect to admission page
 
             })
             .catch((error) => {
                 console.error("Submission failed:", error.response?.data || error.message);
+                swal.fire({
+                    title: "Error!",
+                    text: "Email already exists or submission failed.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
             });
     }
 

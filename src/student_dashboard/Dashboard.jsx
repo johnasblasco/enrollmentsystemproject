@@ -3,26 +3,11 @@ import Admission from "./features/admission/pages/Admission"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { useEffect, useState, useContext } from "react"
 
-import { RegisterContext } from "@/auth/contexts/RegisterContext"
 const DashboardHome = () => {
-
-    const { registerData } = useContext(RegisterContext);
-    const [isAdmitted, setIsAdmitted] = useState(registerData.is_admitted || false);
-
-    useEffect(() => {
-        console.log("Register Data:", registerData);
-    }, [])
-
 
     return (
         <DashboardLayout>
             <h1 className="text-3xl font-bold mb-6">📊 Dashboard Overview</h1>
-            {!isAdmitted && (
-                <div className="fixed z-100  bottom-0 left-0 right-0 w-full h-screen flex items-center justify-center bg-neutral-500/50">
-                    <Admission onAdmit={() => setIsAdmitted(true)} />
-
-                </div>
-            )}
             <div className="grid gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader>

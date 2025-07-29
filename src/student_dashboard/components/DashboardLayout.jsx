@@ -40,15 +40,15 @@ const DashboardLayout = ({ children }) => {
 
     useEffect(() => {
         const path = location.pathname
-        if (path.startsWith("/dashboard/admission")) {
-            setSection("dashboard > admission")
-        } else if (path.startsWith("/dashboard/enrollment")) {
-            setSection("dashboard > enrollment")
-        } else if (path.startsWith("/dashboard/help")) {
-            setSection("dashboard > help")
+        if (path.startsWith("/student_dashboard/admission")) {
+            setSection("student_dashboard > admission")
+        } else if (path.startsWith("/student_dashboard/enrollment")) {
+            setSection("student_dashboard > enrollment")
+        } else if (path.startsWith("/student_dashboard/help")) {
+            setSection("student_dashboard > help")
         }
         else {
-            setSection("dashboard")
+            setSection("student_dashboard")
         }
     }, [location.pathname])
 
@@ -76,20 +76,20 @@ const DashboardLayout = ({ children }) => {
                 {/* Navigation */}
                 <nav className="flex flex-col gap-3 flex-grow text-sm">
 
-                    <Link to="/dashboard" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <LayoutDashboard size={20} />
-                        {!collapsed && "Dashboard"}
+                        {!collapsed && "student_dashboard"}
                     </Link>
-                    <Link to="/dashboard/admission" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard/admission" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookMarked size={20} />
                         {!collapsed && "Admissions"}
                     </Link>
 
-                    <Link to="/dashboard/enrollment" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard/enrollment" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookUser size={20} />
                         {!collapsed && "Enrollments"}
                     </Link>
-                    <Link to="/dashboard/help" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard/help" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <MessageCircleQuestionMark size={20} />
                         {!collapsed && "Help"}
                     </Link>
