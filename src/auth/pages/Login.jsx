@@ -66,8 +66,34 @@ const Login = () => {
 
                 if (data.user.user_type === "admin") {
                     navigate('/admin_dashboard')
-                } else if (data.user.user_type === "admin") {
+
+                    Swal.fire({
+                        title: "Welcome Admin!",
+                        text: "You have successfully logged in as an admin.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
+
+
+                } else if (data.user.user_type === "student") {
                     navigate('/student_dashboard')
+
+                    //change this modal
+                    Swal.fire({
+                        title: "Welcome Student!",
+                        text: "You have successfully logged in as a student.",
+                        icon: "success",
+                        confirmButtonText: "OK"
+                    });
+                }
+                else {
+                    navigate('/')
+                    Swal.fire({
+                        title: "Access Denied!",
+                        text: "You do not have permission to access this area.",
+                        icon: "error",
+                        confirmButtonText: "OK"
+                    });
                 }
 
 
