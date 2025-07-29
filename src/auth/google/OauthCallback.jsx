@@ -17,7 +17,7 @@ const OauthCallback = () => {
 
             setRegisterData(user); // ✅ Store in global context
             console.log("User data set in context:", user);
-            navigate('/dashboard');
+            navigate('/student_dashboard');
         } else {
             navigate('/');
         }
