@@ -188,7 +188,7 @@ const Login = () => {
                     <div className="flex items-center justify-between">
                         <p className="text-sm text-gray-600">
                             No account yet?
-                            <Link to={"/register/personal-information"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
+                            <Link to={"/register"} className="underline text-blue-500"><br />New Applicant(Freshman, transferee)</Link>
                         </p>
 
                         <p className="text-sm text-gray-600">

@@ -9,12 +9,17 @@ import HelpPages from '../dashboard/pages/HelpPage'
 import Verified from '../auth/pages/Verified'
 import OauthCallBack from '../auth/google/OauthCallback'
 import OAuthCallback2 from '../auth/github/OAuthCallback2'
+import Register from '../auth/pages/Register'
 
 const AppRoutes = () => {
     const routes = useRoutes([
         {
             path: '/',
             element: <Login />
+        },
+        {
+            path: '/register',
+            element: <Register />
         },
         {
             path: '/oauth-callback',
