@@ -126,19 +126,6 @@ const AdminAdmissionPage = () => {
         setSelectAll(!selectAll)
     }
 
-
-    // OLDDD CODE
-    // const handleSendEmail = () => {
-    //     const emails = users
-    //         .filter(user => selectedUsers.includes(user.id))
-    //         .map(user => user.email)
-    //     if (emails.length > 0) {
-    //         alert("Sending email to:\n" + emails.join(", "))
-    //     } else {
-    //         alert("No users selected.")
-    //     }
-    // }
-
     const handleDelete = async (id) => {
         if (!confirm("Are you sure you want to delete this user?")) return
         try {
@@ -238,22 +225,28 @@ const AdminAdmissionPage = () => {
                                             onChange={handleSelectAll}
                                         />
                                     </th>
+                                    <th className='p-2'>Applicant Number</th>
                                     <th className="p-2">Name</th>
                                     <th className="p-2">Email</th>
                                     <th className="p-2">Status</th>
                                     <th className="p-2">Campus</th>
+                                    <th className="p-2">Program</th>
                                     <th className="p-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {users.map(user => (
                                     <tr key={user.id} className="border-b hover:bg-gray-50">
+
                                         <td className="p-2">
                                             <input
                                                 type="checkbox"
                                                 checked={selectedUsers.includes(user.id)}
                                                 onChange={() => handleSelectUser(user.id)}
                                             />
+                                        </td>
+                                        <td className="p-2">
+                                            {user.applicant_number}
                                         </td>
                                         <td className="p-2">
                                             {user.first_name} {user.middle_name} {user.last_name}
@@ -265,6 +258,9 @@ const AdminAdmissionPage = () => {
                                             </span>
                                         </td>
                                         <td className="p-2">{user.school_campus}</td>
+                                        <td className="p-2">
+                                            {user.academic_program ? user.academic_program : 'N/A'}
+                                        </td>
                                         <td className="p-2 flex gap-2">
                                             <button className="text-blue-600 hover:underline" title="View">
                                                 <Eye size={18} />

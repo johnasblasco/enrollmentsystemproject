@@ -118,9 +118,10 @@ const Login = () => {
 
         <div className='grid h-screen md:grid-cols-2'>
             {showForgotPassword ? (<ForgotPassword setShowForgotPassword={setShowForgotPassword} />) : (
-                <div data-aos="fade-down" className="shadow-lg mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-lg text-center ">
-                        <h1 className="text-2xl font-bold sm:text-3xl">Enrollment System</h1>
+                <div data-aos="fade-down" className="shadow-lg mx-auto max-w-screen-xl px-4 mt-2 sm:px-6 lg:px-8">
+                    <div className="mx-auto max-w-lg text-center flex flex-col items-center">
+                        <h1 className="text-2xl font-bold sm:text-3xl">SNL Virtual Partner</h1>
+                        <img src="/logo.png" alt="" className='size-20' />
                         <p className="mt-4 ">
                             Welcome to our enrollment system. Please log in to access your account.
                         </p>
