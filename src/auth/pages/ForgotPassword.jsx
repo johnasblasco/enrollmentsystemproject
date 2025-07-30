@@ -49,7 +49,16 @@ const ForgotPassword = ({ setShowForgotPassword }) => {
     };
 
     return (
-        <section data-aos="fade-down" className='flex items-center justify-center min-h-screen px-4'>
+        <section data-aos="fade-down" className='flex flex-col items-center gap-24 min-h-screen px-4'>
+
+            <div className='flex flex-col items-center gap-2'>
+
+                <h1 className="text-2xl font-bold sm:text-3xl">SNL Virtual Partner</h1>
+                <img src="/logo.png" alt="" className='size-20' />
+                <p className="mt-4 text-center">
+                    Forgot your password? Enter your email to receive a reset link below.
+                </p>
+            </div>
             <Card className='w-full max-w-md p-6'>
                 <CardHeader>
                     <CardTitle className="text-center text-xl">Forgot Password</CardTitle>
