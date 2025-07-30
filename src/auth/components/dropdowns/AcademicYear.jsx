@@ -14,9 +14,10 @@ const AcademicYear = ({ value, onChange }) => {
                     className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                 >
                     <option value="">Please select</option>
-                    <option value="JM">2024-2025 -1st Trimester</option>
-                    <option value="SRV"> 2024-2025-2st Semester</option>
+                    <option value="1st Semester">2024-2025 -1st Semester</option>
+                    <option value="2nd Semester"> 2024-2025-2nd Semester</option>
                     <option value="JH">2024-2025 - School Year</option>
+                    {/* still continue */}
                 </select>
             </label>
         </div>

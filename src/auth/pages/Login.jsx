@@ -29,9 +29,6 @@ const Login = () => {
     }, [login, password])
 
 
-
-
-
     const handleButton = async (e) => {
         e.preventDefault(); // Prevent htmlForm submission reload
         setLoading(true);
@@ -71,7 +68,7 @@ const Login = () => {
                     Swal.fire({
                         title: "Welcome Admin!",
                         text: "You have successfully logged in as an admin.",
-                        icon: "success",
+                        icon: "warning",
                         confirmButtonText: "OK"
                     });
 
@@ -240,10 +237,6 @@ const Login = () => {
                     </form>
                 </div>
             )}
-
-
-
-
 
             {/* right */}
             <img src="/bg.jpg" alt="boy" className='md:h-screen hidden md:block' />

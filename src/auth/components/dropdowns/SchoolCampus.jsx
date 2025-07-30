@@ -14,11 +14,11 @@ const SchoolCampus = ({ value, onChange }) => {
                     className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                 >
                     <option value="">Please select</option>
-                    <option value="JM">Main Campus</option>
-                    <option value="SRV">Hagonoy Campus</option>
-                    <option value="JH">SJDM Campus</option>
-                    <option value="BBK">Calumpit Campus</option>
-                    <option value="AK">Paombong Campus</option>
+                    <option value="Main Campus">Main Campus</option>
+                    <option value="Hagonoy Campus">Hagonoy Campus</option>
+                    <option value="SJDM Campus">SJDM Campus</option>
+                    <option value="Calumpit Campus">Calumpit Campus</option>
+                    <option value="Paombong Campus">Paombong Campus</option>
                 </select>
             </label>
         </div>

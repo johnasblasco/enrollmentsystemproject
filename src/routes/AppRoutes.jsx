@@ -15,6 +15,10 @@ import AdminDashboard from '../admin_dashboard/AdminDashboard';
 import GradesPage from '../student_dashboard/pages/GradesPage';
 import ProfilePage from '../student_dashboard/pages/ProfilePage';
 
+import AdminEnrollments from '../admin_dashboard/pages/AdminEnrollments'
+import AdminSettings from '../admin_dashboard/pages/AdminSettings';
+import AdminHelp from '../admin_dashboard/pages/AdminHelp';
+import AdminAdmissionPage from '@/admin_dashboard/pages/AdminAdmissionPage';
 
 
 const AppRoutes = () => {
@@ -78,10 +82,42 @@ const AppRoutes = () => {
         },
         // Admin routes
         {
-            path: '/admin/dashboard',
+            path: '/admin_dashboard',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <AdminDashboard />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/admissions',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminAdmissionPage />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/enrollments',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminEnrollments />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminSettings />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/help',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminHelp />
                 </ProtectedRoute>
             )
         },

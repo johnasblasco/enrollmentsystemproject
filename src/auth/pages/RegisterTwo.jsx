@@ -226,8 +226,14 @@ const RegisterTwo = () => {
                         ]} />
                         <SelectWithLabel label="Religion" value={admissionData.religion} onChange={e => setAdmissionData(p => ({ ...p, religion: e.target.value }))} options={[
                             { value: 'Catholic', label: 'Catholic' },
+                            { value: 'Christian', label: 'Christian' },
                             { value: 'Protestant', label: 'Protestant' },
                             { value: 'Muslim', label: 'Muslim' },
+                            { value: 'Buddhist', label: 'Buddhist' },
+                            { value: 'Hindu', label: 'Hindu' },
+                            { value: 'Atheist', label: 'Atheist' },
+                            { value: 'Agnostic', label: 'Agnostic' },
+                            { value: 'None', label: 'None' },
                             { value: 'Other', label: 'Other' },
                         ]} />
                         <SelectWithLabel label="Ethnic Affiliation" value={admissionData.ethnic_affiliation} onChange={e => setAdmissionData(p => ({ ...p, ethnic_affiliation: e.target.value }))} options={[
@@ -235,6 +241,16 @@ const RegisterTwo = () => {
                             { value: 'Bontoc', label: 'Bontoc' },
                             { value: 'Bicolano', label: 'Bicolano' },
                             { value: 'Bilang', label: 'Bilang' },
+                            { value: 'Cagayan', label: 'Cagayan' },
+                            { value: 'Igorot', label: 'Igorot' },
+                            { value: 'Ilocano', label: 'Ilocano' },
+                            { value: 'Ilonggo', label: 'Ilonggo' },
+                            { value: 'Kapampangan', label: 'Kapampangan' },
+                            { value: 'Kinaray-a', label: 'Kinaray-a' },
+                            { value: 'Maranao', label: 'Maranao' },
+                            { value: 'Pangasinense', label: 'Pangasinense' },
+                            { value: 'Tagalog', label: 'Tagalog' },
+                            { value: 'None', label: 'None' },
                         ]} />
                     </div>
 

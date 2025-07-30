@@ -81,7 +81,7 @@ const DashboardLayout = ({ children }) => {
 
                     <Link to="/student_dashboard" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <LayoutDashboard size={20} />
-                        {!collapsed && "student_dashboard"}
+                        {!collapsed && "dashboard"}
                     </Link>
                     <Link to="/student_dashboard/admission" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
                         <BookMarked size={20} />

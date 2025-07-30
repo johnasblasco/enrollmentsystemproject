@@ -14,13 +14,13 @@ const ApplicationType = ({ value, onChange }) => {
                     className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                 >
                     <option value="">Please select</option>
-                    <option value="JM">University Academic Extension Programs</option>
-                    <option value="SRV">Regular In-Campus</option>
-                    <option value="JH">Pure Online/Modular</option>
-                    <option value="BBK">Freshman</option>
-                    <option value="AK">Transferee</option>
-                    <option value="BG">Cross-Enrollee</option>
-                    <option value="EC">Returnee</option>
+                    <option value="University Academic Extension Programs">University Academic Extension Programs</option>
+                    <option value="Regular In-Campus">Regular In-Campus</option>
+                    <option value="Pure Online/Modular">Pure Online/Modular</option>
+                    <option value="Freshman">Freshman</option>
+                    <option value="Transferee">Transferee</option>
+                    <option value=">Cross-Enrollee">Cross-Enrollee</option>
+                    <option value="Returnee">Returnee</option>
                 </select>
             </label>
         </div>

@@ -14,13 +14,13 @@ const AcademicProgram = ({ value, onChange }) => {
                     className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                 >
                     <option value="">Please select</option>
-                    <option value="JM">BSIT</option>
-                    <option value="SRV">BSCS</option>
-                    <option value="JH">BEED</option>
-                    <option value="BBK">BSN</option>
-                    <option value="AK">BSBA</option>
-                    <option value="BG">BSCE</option>
-                    <option value="EC">BSIS</option>
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSCS">BSCS</option>
+                    <option value="BEED">BEED</option>
+                    <option value="BSN">BSN</option>
+                    <option value="BSBA">BSBA</option>
+                    <option value="BSCE">BSCE</option>
+                    <option value="BSIS">BSIS</option>
                 </select>
             </label>
         </div>

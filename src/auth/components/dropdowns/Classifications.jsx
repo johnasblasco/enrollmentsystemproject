@@ -14,13 +14,13 @@ const Classifications = ({ value, onChange, gradeLevel, onGradeChange }) => {
                     className="md:p-2 mt-0.5 w-full rounded border-gray-300 shadow-sm sm:text-sm md:w-[600px]"
                 >
                     <option value="">Please select</option>
-                    <option value="PS">Pre-School</option>
-                    <option value="GS">Grade School</option>
+                    <option value="Pre-School">Pre-School</option>
+                    <option value="Grade School">Grade School</option>
                     <option value="JHS">JHS</option>
                     <option value="SHS">SHS</option>
-                    <option value="TV">Technical/Vocational</option>
-                    <option value="COL">College</option>
-                    <option value="M">Masters</option>
+                    <option value="Technical/Vocational">Technical/Vocational</option>
+                    <option value="College">College</option>
+                    <option value="Masters">Masters</option>
                     <option value="PHD">PHD</option>
                 </select>
             </label>
