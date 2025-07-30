@@ -34,7 +34,9 @@ const AdminAdmissionPage = () => {
 
     const [emailModalOpen, setEmailModalOpen] = useState(false)
     const [customMessage, setCustomMessage] = useState("Please click the link below to begin your examination.")
-    const [programName, setProgramName] = useState("NA")
+
+    const [subject, setSubject] = useState("Entrance Exam Invitation");
+
 
     //dropdown menu state
     const [position, setPosition] = useState("bottom");
@@ -51,13 +53,21 @@ const AdminAdmissionPage = () => {
     const sendCustomizedEmails = async () => {
         const recipients = users.filter(user => selectedUsers.includes(user.id));
         const emailList = recipients.map(user => user.email);
+        const token = localStorage.getItem("token"); // or however you're storing the auth token
 
         try {
-            const response = await axios.post("https://your-laravel-api.com/api/send-manual-admission-email", {
+            const response = await axios.post("https://server.laravel.bpc-bsis4d.com/public/api/sendemail", {
                 emails: emailList,
                 custom_message: customMessage,
                 subject: subject,
-            });
+            },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+
+            );
 
             if (response.data.isSuccess) {
                 alert("✅ Emails sent successfully!");
@@ -281,10 +291,16 @@ const AdminAdmissionPage = () => {
                         </DialogHeader>
 
                         <div className="flex flex-col gap-4">
-                            <label>
-                                Program Name:
-                                <Input value={programName} onChange={(e) => setProgramName(e.target.value)} />
-                            </label>
+
+                            <div className="mt-2">
+                                <label htmlFor="subject">Subject</label>
+                                <Input
+                                    id="subject"
+                                    value={subject}
+                                    onChange={(e) => setSubject(e.target.value)}
+                                    placeholder="e.g., Entrance Exam Schedule"
+                                />
+                            </div>
                             <label>
                                 Message Body:
                                 <textarea
