@@ -31,6 +31,7 @@ import AdmittedAccounts from '../admin_dashboard/pages/section/admission/Admitte
 
 //admin settings
 import Users from '../admin_dashboard/pages/section/settings/Users';
+import UserRoles from '../admin_dashboard/pages/section/settings/UserRoles';
 
 
 const AppRoutes = () => {
@@ -193,6 +194,14 @@ const AppRoutes = () => {
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <Users />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/roles',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <UserRoles />
                 </ProtectedRoute>
             )
         },

@@ -121,7 +121,7 @@ const AdminSettingPage = () => {
                             <p className="text-sm text-muted-foreground">Define and manage admin, staff, or student roles.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/roles')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/roles')}>
                                 Manage Roles
                             </Button>
                         </CardContent>
