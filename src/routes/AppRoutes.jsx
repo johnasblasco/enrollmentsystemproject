@@ -101,7 +101,7 @@ const AppRoutes = () => {
         },
         // Admin Academic
         {
-            path: '/admin_dashboard/academic',
+            path: '/admin_dashboard/academics',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <AdminAcademicPage />
