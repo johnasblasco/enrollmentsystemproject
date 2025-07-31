@@ -18,7 +18,6 @@ import {
 
 const AdminSettingPage = () => {
     const navigate = useNavigate()
-    const [userCount, setUserCount] = useState(0)
     const [pendingApplications, setPendingApplications] = useState(0)
 
     // useEffect(() => {
@@ -36,6 +35,22 @@ const AdminSettingPage = () => {
     //     }
     // }
 
+    const [users, setUsers] = useState([]);
+
+    const fetchUsers = async () => {
+        try {
+            const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getusers");
+            setUsers(res.data.users);
+            console.log("Fetched users:", res.data.users);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
     return (
         <DashboardLayout>
             <div className="p-6 space-y-6">
@@ -46,11 +61,11 @@ const AdminSettingPage = () => {
                     <Card className="flex flex-col justify-between">
                         <CardHeader className="flex flex-col gap-2">
                             <Users className="text-blue-500 w-5 h-5" />
-                            <CardTitle>Users ({userCount})</CardTitle>
+                            <CardTitle>Users ({users.length})</CardTitle>
                             <p className="text-sm text-muted-foreground">View and manage users & roles.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/users')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/users')}>
                                 Manage Users
                             </Button>
                         </CardContent>

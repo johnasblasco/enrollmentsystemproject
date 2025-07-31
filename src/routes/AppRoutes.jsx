@@ -29,6 +29,8 @@ import AdminHelpPage from '../admin_dashboard/pages/AdminHelpPage';
 //admin admission
 import AdmittedAccounts from '../admin_dashboard/pages/section/admission/AdmittedAccounts';
 
+//admin settings
+import Users from '../admin_dashboard/pages/section/settings/Users';
 
 
 const AppRoutes = () => {
@@ -183,6 +185,14 @@ const AppRoutes = () => {
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <AdminSettingPage />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/users',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Users />
                 </ProtectedRoute>
             )
         },

@@ -30,7 +30,6 @@ const AdminDashboard = () => {
     return (
         <DashboardLayout>
             <div className="p-6">
-                <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {sections.map(({ label, icon: Icon, link }, index) => (
                         <Link to={link} key={index} className="block">
