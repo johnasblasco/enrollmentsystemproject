@@ -15,10 +15,20 @@ import AdminDashboard from '../admin_dashboard/AdminDashboard';
 import GradesPage from '../student_dashboard/pages/GradesPage';
 import ProfilePage from '../student_dashboard/pages/ProfilePage';
 
-import AdminEnrollments from '../admin_dashboard/pages/AdminEnrollments'
-import AdminSettings from '../admin_dashboard/pages/AdminSettings';
-import AdminHelp from '../admin_dashboard/pages/AdminHelp';
-import AdminAdmissionPage from '@/admin_dashboard/pages/AdminAdmissionPage';
+//admins
+import AdminAcademicPage from '../admin_dashboard/pages/AdminAcademicPage';
+import AdminAccountingPage from '../admin_dashboard/pages/AdminAccountingPage';
+import AdminAdmissionPage from '../admin_dashboard/pages/AdminAdmissionPage';
+import AdminCashierPage from '../admin_dashboard/pages/AdminCashierPage';
+import AdminEnrollmentPage from '../admin_dashboard/pages/AdminEnrollmentPage'
+import AdminRegistrarPage from '../admin_dashboard/pages/AdminRegistrarPage';
+import AdminSettingPage from '../admin_dashboard/pages/AdminSettingPage';
+import AdminHelpPage from '../admin_dashboard/pages/AdminHelpPage';
+
+
+//admin admission
+import AdmittedAccounts from '../admin_dashboard/pages/section/admission/AdmittedAccounts';
+
 
 
 const AppRoutes = () => {
@@ -89,6 +99,27 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             )
         },
+        // Admin Academic
+        {
+            path: '/admin_dashboard/academic',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminAcademicPage />
+                </ProtectedRoute>
+            )
+        },
+
+        // Admin Accounting
+        {
+            path: '/admin_dashboard/accounting',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminAccountingPage />
+                </ProtectedRoute>
+            )
+        },
+
+        // Admin Admission
         {
             path: '/admin_dashboard/admissions',
             element: (
@@ -98,26 +129,60 @@ const AppRoutes = () => {
             )
         },
         {
-            path: '/admin_dashboard/enrollments',
+            path: '/admin_dashboard/admissions/admitted-accounts',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminEnrollments />
+                    <AdmittedAccounts />
                 </ProtectedRoute>
             )
         },
+
+        // Admin Cashier
         {
-            path: '/admin_dashboard/settings',
+            path: '/admin_dashboard/cashier',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminSettings />
+                    <AdminCashierPage />
                 </ProtectedRoute>
             )
         },
+
+
+        // Admin Enrollment
+        {
+            path: '/admin_dashboard/enrollment',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminEnrollmentPage />
+                </ProtectedRoute>
+            )
+        },
+        // Admin Help
         {
             path: '/admin_dashboard/help',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
-                    <AdminHelp />
+                    <AdminHelpPage />
+                </ProtectedRoute>
+            )
+        },
+
+        // Admin Registrar
+        {
+            path: '/admin_dashboard/registrar',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminRegistrarPage />
+                </ProtectedRoute>
+            )
+        },
+
+        // Admin Settings
+        {
+            path: '/admin_dashboard/settings',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <AdminSettingPage />
                 </ProtectedRoute>
             )
         },

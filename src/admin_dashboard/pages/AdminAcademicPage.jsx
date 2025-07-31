@@ -8,10 +8,7 @@ import {
     Users,
 
 } from 'lucide-react'
-
-const AdminAdmissionPage = () => {
-    const navigate = useNavigate()
-
+const AdminAcademicPage = () => {
     return (
         <DashboardLayout>
             <div className="p-6 space-y-6">
@@ -37,4 +34,4 @@ const AdminAdmissionPage = () => {
     )
 }
 
-export default AdminAdmissionPage
+export default AdminAcademicPage
