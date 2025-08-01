@@ -15,7 +15,14 @@ const Users = () => {
 
     const fetchRoles = async () => {
         try {
-            const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getusertypes");
+            const token = localStorage.getItem('token');
+            const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getusertypes", {
+                //get the token on local storage
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Auth': 'Bearer ' + token
+                }
+            });
             setRoles(res.data.userTypes);
             console.log("Fetched roles:", res.data.userTypes);
         } catch (err) {
