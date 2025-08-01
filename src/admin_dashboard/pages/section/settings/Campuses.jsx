@@ -22,6 +22,18 @@ const Campuses = () => {
 
   const handleSave = async (data, id) => {
     const token = localStorage.getItem('token');
+
+    // Basic validation
+    if (!data.campus_name || data.campus_name.trim() === "") {
+      alert("Campus name is required.");
+      return;
+    }
+
+    if (!data.campus_description || data.campus_description.trim() === "") {
+      alert(`{${data.campus_description} Description is required.`);
+      return;
+    }
+
     try {
       const url = id
         ? `https://server.laravel.bpc-bsis4d.com/public/api/updatecampus/${id}`
@@ -40,6 +52,7 @@ const Campuses = () => {
       console.error(err);
     }
   };
+
 
   const handleDelete = async (id) => {
     try {

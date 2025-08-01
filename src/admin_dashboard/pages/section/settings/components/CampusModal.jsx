@@ -16,8 +16,23 @@ const CampusModal = ({ campus, onClose, onSave }) => {
     }, [campus]);
 
     const handleSubmit = () => {
-        onSave({ name, description }, campus?.id);
+        if (!name.trim()) {
+            alert("Campus name is required.");
+            return;
+        }
+        if (!description.trim()) {
+
+            alert(`this is ${description} || dscription is required.`);
+            return;
+        }
+
+        onSave({ campus_name: name, campus_description: description }, campus?.id);
     };
+
+    useEffect(() => {
+        console.log(description)
+    }, [description]);
+
 
     return (
         <Dialog open onOpenChange={onClose}>
