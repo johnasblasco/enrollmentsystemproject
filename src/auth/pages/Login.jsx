@@ -62,7 +62,7 @@ const Login = () => {
                 console.log("WHAWAHAWH: ", data.user);
                 setRegisterData(data.user)
 
-                if (data.user.user_type === "admin") {
+                if (data.user.user_type.id == 3) {
                     navigate('/admin_dashboard')
 
                     Swal.fire({
@@ -73,7 +73,7 @@ const Login = () => {
                     });
 
 
-                } else if (data.user.user_type === "student") {
+                } else if (data.user.user_type.id == 2) {
                     navigate('/student_dashboard')
 
                     //change this modal

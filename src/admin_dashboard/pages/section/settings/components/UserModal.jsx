@@ -48,7 +48,7 @@ const UserModal = ({ roles, user, onClose, onSuccess }) => {
 
         try {
             if (isEdit) {
-                await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/users/${user.id}`, form);
+                await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/updateuser/${user.id}`, form);
             } else {
                 await axios.post("https://server.laravel.bpc-bsis4d.com/public/api/createuser", form);
             }
