@@ -14,6 +14,8 @@ const Users = () => {
     const [roles, setRoles] = useState([]);
 
     const fetchRoles = async () => {
+        const token = localStorage.getItem("token");
+
         try {
             const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getusertypes", {
                 //get the token on local storage

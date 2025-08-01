@@ -24,10 +24,10 @@ const UserModal = ({ roles, user, onClose, onSuccess }) => {
     useEffect(() => {
         if (user) {
             setForm({
-                given_name: user.given_name,
-                surname: user.surname,
-                email: user.email,
-                user_type_id: user.user_type.id,
+                given_name: user.given_name || "",
+                surname: user.surname || "",
+                email: user.email || "",
+                user_type_id: user.user_type?.id?.toString() || "", // <-- safer
             });
         } else {
             setForm({
@@ -38,6 +38,7 @@ const UserModal = ({ roles, user, onClose, onSuccess }) => {
             });
         }
     }, [user]);
+
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
