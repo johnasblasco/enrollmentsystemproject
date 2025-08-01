@@ -71,20 +71,6 @@ const AdminSettingPage = () => {
                         </CardContent>
                     </Card>
 
-                    {/* Courses */}
-                    <Card className="flex flex-col justify-between">
-                        <CardHeader className="flex flex-col gap-2">
-                            <BookOpenText className="text-violet-600 w-5 h-5" />
-                            <CardTitle>Courses</CardTitle>
-                            <p className="text-sm text-muted-foreground">Manage available academic programs and courses.</p>
-                        </CardHeader>
-                        <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/courses')}>
-                                Manage Courses
-                            </Button>
-                        </CardContent>
-                    </Card>
-
                     {/* Campuses */}
                     <Card className="flex flex-col justify-between">
                         <CardHeader className="flex flex-col gap-2">
@@ -93,11 +79,27 @@ const AdminSettingPage = () => {
                             <p className="text-sm text-muted-foreground">Configure campus data and assign campuses to users.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/campuses')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/campuses')}>
                                 Manage Campuses
                             </Button>
                         </CardContent>
                     </Card>
+
+                    {/* Courses */}
+                    <Card className="flex flex-col justify-between">
+                        <CardHeader className="flex flex-col gap-2">
+                            <BookOpenText className="text-violet-600 w-5 h-5" />
+                            <CardTitle>Courses</CardTitle>
+                            <p className="text-sm text-muted-foreground">Manage available academic programs and courses.</p>
+                        </CardHeader>
+                        <CardContent>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/courses')}>
+                                Manage Courses
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+
 
                     {/* School Year */}
                     <Card className="flex flex-col justify-between">
@@ -107,7 +109,7 @@ const AdminSettingPage = () => {
                             <p className="text-sm text-muted-foreground">Set active academic year and enrollment periods.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/school-year')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/school-year')}>
                                 Edit School Year
                             </Button>
                         </CardContent>
@@ -135,7 +137,7 @@ const AdminSettingPage = () => {
                             <p className="text-sm text-muted-foreground">Manage sections for each course and academic level.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin/sections')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/sections')}>
                                 Configure Sections
                             </Button>
                         </CardContent>

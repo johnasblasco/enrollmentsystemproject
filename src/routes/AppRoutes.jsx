@@ -32,6 +32,10 @@ import AdmittedAccounts from '../admin_dashboard/pages/section/admission/Admitte
 //admin settings
 import Users from '../admin_dashboard/pages/section/settings/Users';
 import UserRoles from '../admin_dashboard/pages/section/settings/UserRoles';
+import Campuses from '../admin_dashboard/pages/section/settings/Campuses';
+import SchoolYear from '../admin_dashboard/pages/section/settings/SchoolYear';
+import Sections from '../admin_dashboard/pages/section/settings/Sections';
+import Courses from '../admin_dashboard/pages/section/settings/Courses';
 
 
 const AppRoutes = () => {
@@ -202,6 +206,38 @@ const AppRoutes = () => {
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <UserRoles />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/campuses',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Campuses />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/courses',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Courses />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/school-year',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <SchoolYear />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/sections',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Sections />
                 </ProtectedRoute>
             )
         },

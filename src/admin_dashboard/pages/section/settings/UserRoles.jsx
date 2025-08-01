@@ -62,7 +62,7 @@ const UserRoles = () => {
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">User Roles</h1>
                     <Button onClick={() => { setEditingRole(null); setOpenModal(true); }}>
-                        <Plus className="w-4 h-4 mr-2" /> Add Role
+                        <Plus className="w-42 h-4 mr-2" /> Add Role
                     </Button>
                 </div>
                 <RoleTable roles={roles} onEdit={(r) => { setEditingRole(r); setOpenModal(true); }} onDelete={handleDelete} />
