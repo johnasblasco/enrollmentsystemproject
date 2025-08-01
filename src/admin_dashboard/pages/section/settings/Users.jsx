@@ -11,6 +11,18 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
+    const [roles, setRoles] = useState([]);
+
+    const fetchRoles = async () => {
+        try {
+            const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getusertypes");
+            setRoles(res.data.userTypes);
+            console.log("Fetched roles:", res.data.userTypes);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
 
     const fetchUsers = async () => {
         try {
@@ -25,6 +37,7 @@ const Users = () => {
 
     useEffect(() => {
         fetchUsers();
+        fetchRoles();
     }, []);
     return (
         <DashboardLayout>
@@ -51,6 +64,7 @@ const Users = () => {
 
                 {openModal && (
                     <UserModal
+                        roles={roles}
                         user={editingUser}
                         onClose={() => setOpenModal(false)}
                         onSuccess={() => {

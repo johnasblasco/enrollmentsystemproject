@@ -4,8 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import {
+    Select,
+    SelectTrigger,
+    SelectValue,
+    SelectContent,
+    SelectItem,
+} from "@/components/ui/select";
 
-const UserModal = ({ user, onClose, onSuccess }) => {
+const UserModal = ({ roles, user, onClose, onSuccess }) => {
     const isEdit = Boolean(user);
     const [form, setForm] = useState({
         given_name: "",
@@ -41,9 +48,9 @@ const UserModal = ({ user, onClose, onSuccess }) => {
 
         try {
             if (isEdit) {
-                await axios.put(`https://server.laravel.bpc-bsis4d.com/public/api/users/${user.id}`, form);
+                await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/users/${user.id}`, form);
             } else {
-                await axios.post("https://server.laravel.bpc-bsis4d.com/public/api/users", form);
+                await axios.post("https://server.laravel.bpc-bsis4d.com/public/api/createuser", form);
             }
             onSuccess();
         } catch (error) {
@@ -58,22 +65,42 @@ const UserModal = ({ user, onClose, onSuccess }) => {
                     <DialogTitle>{isEdit ? "Edit User" : "Add User"}</DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
+                    <div className="space-y-2">
                         <Label>Given Name</Label>
                         <Input name="given_name" value={form.given_name} onChange={handleChange} required />
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <Label>Surname</Label>
                         <Input name="surname" value={form.surname} onChange={handleChange} required />
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <Label>Email</Label>
                         <Input name="email" value={form.email} onChange={handleChange} required />
                     </div>
-                    <div>
-                        <Label>Role ID</Label>
-                        <Input name="user_type_id" value={form.user_type_id} onChange={handleChange} required />
+
+                    <div className="space-y-2">
+                        <Label>User Type</Label>
+                        <Select
+                            value={form.user_type_id}
+                            onValueChange={(value) =>
+                                setForm({ ...form, user_type_id: value })
+                            }
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select User Type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {roles.map((type) => (
+                                    <SelectItem key={type.id} value={String(type.id)}>
+                                        {type.role_name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+
                     </div>
+
+
                     <div className="flex justify-end space-x-2">
                         <Button type="button" variant="ghost" onClick={onClose}>Cancel</Button>
                         <Button type="submit">{isEdit ? "Update" : "Create"}</Button>
