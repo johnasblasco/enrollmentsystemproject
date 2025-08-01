@@ -21,7 +21,7 @@ const SchoolYear = () => {
             const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getschoolyears", {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setSchoolYears(res.data.school_years || []);
+            setSchoolYears(res.data.schoolYears || []);
         } catch (err) {
             console.error(err);
         }
@@ -64,7 +64,7 @@ const SchoolYear = () => {
 
     return (
         <DashboardLayout>
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-4 w-full">
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">School Year</h1>
                     <Button onClick={() => { setOpen(true); setForm({ school_year: "" }); setEditing(null); }}>
@@ -72,18 +72,21 @@ const SchoolYear = () => {
                     </Button>
                 </div>
 
-                <Table>
+
+                <Table className="rounded-md border w-full" >
                     <TableHeader>
                         <TableRow>
                             <TableHead>School Year</TableHead>
-                            <TableHead>Actions</TableHead>
+                            <TableHead>Semester</TableHead>
+                            <TableHead className={"text-right w-1/2"}>Actions</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {schoolYears.map((sy) => (
                             <TableRow key={sy.id}>
                                 <TableCell>{sy.school_year}</TableCell>
-                                <TableCell>
+                                <TableCell>{sy.semester}</TableCell>
+                                <TableCell className={"text-right w-1/2"}>
                                     <Button
                                         variant="outline"
                                         onClick={() => {
