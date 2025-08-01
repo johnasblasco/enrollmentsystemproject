@@ -24,23 +24,24 @@ const UserRoles = () => {
     const handleSave = async (data, id) => {
         const token = localStorage.getItem('token');
         try {
-            if (id) {
-                await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/updateusertype/${id}`, {
+            const url = id
+                ? `https://server.laravel.bpc-bsis4d.com/public/api/updateusertype/${id}`
+                : "https://server.laravel.bpc-bsis4d.com/public/api/createusertype";
+
+            await axios.post(url, data, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
-                    'Auth': 'Bearer ' + token
-                }, data);
-            } else {
-                await axios.post("https://server.laravel.bpc-bsis4d.com/public/api/createusertype", {
-                    'Content-Type': 'application/json',
-                    'Auth': 'Bearer ' + token
-                }, data);
-            }
+                },
+            });
+
             fetchRoles();
             setOpenModal(false);
         } catch (err) {
             console.error(err);
         }
     };
+
 
     const handleDelete = async (id) => {
         try {
