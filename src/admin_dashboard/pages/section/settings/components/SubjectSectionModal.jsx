@@ -23,14 +23,15 @@ const SubjectSectionModal = ({
     })
 
     useEffect(() => {
-        if (defaultValues) {
+        if (open && defaultValues) {
             setFormData({
                 subject_code: defaultValues.subject_code || "",
                 subject_name: defaultValues.subject_name || "",
                 units: defaultValues.units || "",
             })
         }
-    }, [defaultValues])
+    }, [open])
+
 
     const handleChange = (e) => {
         const { name, value } = e.target
