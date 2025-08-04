@@ -1,6 +1,11 @@
 import React from 'react'
-
+import axios from 'axios'
 const AcademicProgram = ({ value, onChange }) => {
+
+    const fetchAcademicData = async () => {
+
+    }
+
     return (
         <div>
             <label htmlFor="Headline" className='flex gap-2'>

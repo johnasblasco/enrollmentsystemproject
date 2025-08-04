@@ -25,10 +25,12 @@ const sections = [
     { label: 'Settings', icon: Settings, link: '/admin_dashboard/settings' },
     { label: 'Help', icon: MessageCircleQuestion, link: '/admin_dashboard/help' },
 ]
+import { DashboardChart } from './components/DashboardChart'
 
 const AdminDashboard = () => {
     return (
         <DashboardLayout>
+            <DashboardChart />
             <div className="p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {sections.map(({ label, icon: Icon, link }, index) => (

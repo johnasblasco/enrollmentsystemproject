@@ -1,26 +1,23 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 
-const SectionModal = ({ onClose, onSuccess, section, campuses }) => {
-    const [name, setName] = useState(section?.name || "");
-    const [campusId, setCampusId] = useState(section?.campus_id || "");
+const SectionModal = ({ section, campuses, courses, onClose, onSave }) => {
+    const [form, setForm] = useState({
+        section_name: section?.section_name || "",
+        campus_id: section?.campus_id || "",
+        course_id: section?.course_id || "",
+    });
 
-    const handleSubmit = async () => {
-        try {
-            if (section) {
-                await axios.put(`https://your-api/sections/${section.id}`, { name, campus_id: campusId });
-            } else {
-                await axios.post("https://your-api/sections", { name, campus_id: campusId });
-            }
-            onSuccess();
-        } catch (err) {
-            console.error(err);
-        }
+    const handleChange = (key, value) => {
+        setForm({ ...form, [key]: value });
+    };
+
+    const handleSubmit = () => {
+        onSave(form, section?.id || null);
     };
 
     return (
@@ -29,29 +26,49 @@ const SectionModal = ({ onClose, onSuccess, section, campuses }) => {
                 <DialogHeader>
                     <DialogTitle>{section ? "Edit Section" : "Add Section"}</DialogTitle>
                 </DialogHeader>
+
                 <div className="space-y-4">
                     <div>
                         <Label>Section Name</Label>
-                        <Input value={name} onChange={(e) => setName(e.target.value)} />
+                        <Input value={form.section_name} onChange={(e) => handleChange("section_name", e.target.value)} />
                     </div>
+
                     <div>
                         <Label>Campus</Label>
-                        <Select value={campusId} onValueChange={setCampusId}>
+                        <Select value={form.campus_id} onValueChange={(val) => handleChange("campus_id", val)}>
                             <SelectTrigger>
                                 <SelectValue placeholder="Select campus" />
                             </SelectTrigger>
                             <SelectContent>
-                                {campuses.map((campus) => (
-                                    <SelectItem key={campus.id} value={campus.id.toString()}>
-                                        {campus.campus_name}
+                                {campuses.map(c => (
+                                    <SelectItem key={c.id} value={String(c.id)}>
+                                        {c.campus_name}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
                     </div>
-                    <Button className="w-full" onClick={handleSubmit}>
-                        {section ? "Update" : "Create"}
-                    </Button>
+
+                    <div>
+                        <Label>Course</Label>
+                        <Select value={form.course_id} onValueChange={(val) => handleChange("course_id", val)}>
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select course" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {courses.map(c => (
+                                    <SelectItem key={c.id} value={String(c.id)}>
+                                        {c.course_name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <div className="flex justify-end gap-2">
+                        <Button variant="outline" onClick={onClose}>Cancel</Button>
+                        <Button onClick={handleSubmit}>{section ? "Update" : "Save"}</Button>
+                    </div>
                 </div>
             </DialogContent>
         </Dialog>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import {
     Users,
+    Notebook,
     FileText,
     Settings,
     MailCheck,
@@ -139,6 +140,21 @@ const AdminSettingPage = () => {
                         <CardContent>
                             <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/sections')}>
                                 Configure Sections
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+
+                    {/* Subjects */}
+                    <Card className="flex flex-col justify-between">
+                        <CardHeader className="flex flex-col gap-2">
+                            <Notebook className="text-pink-400 w-5 h-5" />
+                            <CardTitle>Subjects</CardTitle>
+                            <p className="text-sm text-muted-foreground">Manage Subjects for Student based.</p>
+                        </CardHeader>
+                        <CardContent>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/subjects')}>
+                                Manage Subjects
                             </Button>
                         </CardContent>
                     </Card>
