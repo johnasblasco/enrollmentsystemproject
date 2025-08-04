@@ -153,7 +153,7 @@ const AdminSettingPage = () => {
                             <p className="text-sm text-muted-foreground">Manage Subjects for Student based.</p>
                         </CardHeader>
                         <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/subjects')}>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/subject')}>
                                 Manage Subjects
                             </Button>
                         </CardContent>

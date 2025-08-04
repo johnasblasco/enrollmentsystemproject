@@ -26,10 +26,13 @@ const sections = [
     { label: 'Help', icon: MessageCircleQuestion, link: '/admin_dashboard/help' },
 ]
 import { DashboardChart } from './components/DashboardChart'
+import DashboardSummary from './components/SummaryCard'
 
 const AdminDashboard = () => {
     return (
         <DashboardLayout>
+
+            <DashboardSummary />
             <DashboardChart />
             <div className="p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
