@@ -4,6 +4,7 @@ import axios from 'axios'
 import swal from 'sweetalert2'
 
 import { AdmissionContext } from '@/globalContexts/AdmissionContext'
+import SeparatorOne from '../components/separator/SeparatorOne'
 
 const RegisterTwo = () => {
     const navigate = useNavigate()
@@ -111,8 +112,8 @@ const RegisterTwo = () => {
 
     return (
         <div>
-            <section className="flex flex-col gap-4 justify-center items-center py-16">
-                <form className="w-full max-w-4xl border border-gray-200 rounded-lg p-10 bg-white shadow-md space-y-6">
+            <section className="flex flex-col gap-4 justify-center items-center py-4 ">
+                <form className="max-h-[90vh] overflow-auto w-full max-w-4xl border border-gray-200 rounded-lg p-10 bg-white shadow-md space-y-6">
                     <h1 className="text-3xl my-4 font-semibold text-center text-purple-600">
                         Personal Information
                     </h1>
@@ -145,14 +146,30 @@ const RegisterTwo = () => {
                             { value: 'separated', label: 'Separated' },
                             { value: 'divorced', label: 'Divorced' },
                         ]} />
-                        <SelectWithLabel label="Indigenous Community" value={admissionData.is_indigenous} onChange={e => setAdmissionData(p => ({ ...p, is_indigenous: e.target.value }))} options={[
-                            { value: 'yes', label: 'Yes' },
-                            { value: 'no', label: 'No' },
-                        ]} />
+                        <SelectWithLabel
+                            label="BloodType"
+                            value={admissionData.blood_type}
+                            onChange={e => setAdmissionData(p => ({ ...p, blood_type: e.target.value }))}
+                            options={[
+                                { label: "A+", value: "A+" },
+                                { label: "A-", value: "A-" },
+                                { label: "B+", value: "B+" },
+                                { label: "B-", value: "B-" },
+                                { label: "AB+", value: "AB+" },
+                                { label: "AB-", value: "AB-" },
+                                { label: "O+", value: "O+" },
+                                { label: "O-", value: "O-" },
+                            ]}
+                        />
+
                         <SelectWithLabel label="PWD" value={admissionData.is_insurance_member} onChange={e => setAdmissionData(p => ({ ...p, is_insurance_member: e.target.value }))} options={[
                             { value: 'yes', label: 'Yes' },
                             { value: 'no', label: 'No' },
                         ]} />
+                    </div>
+
+                    <div className='mt-20 mb-10'>
+                        <SeparatorOne title={"Personal Address"} />
                     </div>
 
                     {/* Address */}
@@ -255,8 +272,8 @@ const RegisterTwo = () => {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <InputWithLabel label="Telephone Number" value={admissionData.telephone_number} onChange={e => setAdmissionData(p => ({ ...p, telephone_number: e.target.value }))} />
-                        <InputWithLabel label="Mobile Number" required value={admissionData.mobile_number} onChange={e => setAdmissionData(p => ({ ...p, mobile_number: e.target.value }))} />
+                        <InputWithLabel type="number" label="Telephone Number" value={admissionData.telephone_number} onChange={e => setAdmissionData(p => ({ ...p, telephone_number: e.target.value }))} />
+                        <InputWithLabel type='number' label="Mobile Number" required value={admissionData.mobile_number} onChange={e => setAdmissionData(p => ({ ...p, mobile_number: e.target.value }))} />
                         <InputWithLabel label="Email" type="email" required value={admissionData.email} onChange={e => setAdmissionData(p => ({ ...p, email: e.target.value }))} />
                     </div>
 
@@ -270,10 +287,24 @@ const RegisterTwo = () => {
                             { value: 'Yes', label: 'Yes' },
                             { value: 'No', label: 'No' },
                         ]} />
-                        <SelectWithLabel label="IP / Indigenous group?" value={admissionData.is_ip} onChange={e => setAdmissionData(p => ({ ...p, is_ip: e.target.value }))} options={[
+                        <SelectWithLabel label="IP / Indigenous group?" value={admissionData.is_indigenous} onChange={e => setAdmissionData(p => ({ ...p, is_indigenous: e.target.value }))} options={[
                             { value: 'Yes', label: 'Yes' },
                             { value: 'No', label: 'No' },
                         ]} />
+                    </div>
+
+                    <div className='mt-20 mb-10'>
+                        <SeparatorOne title={"Guardians and Parents Information"} />
+                    </div>
+                    {/* Guardians & Parents */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <InputWithLabel label="Guardian Name" type="text" required value={admissionData.guardian_name} onChange={e => setAdmissionData(p => ({ ...p, guardian_name: e.target.value }))} />
+                        <InputWithLabel label="Guardian Contact" type="number" required value={admissionData.guardian_contact} onChange={e => setAdmissionData(p => ({ ...p, guardian_contact: e.target.value }))} />
+                        <InputWithLabel label="Father Name" type="text" required value={admissionData.father_name} onChange={e => setAdmissionData(p => ({ ...p, father_name: e.target.value }))} />
+                        <InputWithLabel label="Father Contact" type="number" required value={admissionData.father_contact} onChange={e => setAdmissionData(p => ({ ...p, father_contact: e.target.value }))} />
+                        <InputWithLabel label="Mother Name" type="text" required value={admissionData.mother_name} onChange={e => setAdmissionData(p => ({ ...p, mother_name: e.target.value }))} />
+                        <InputWithLabel label="Mother Contact" type="number" required value={admissionData.mother_contact} onChange={e => setAdmissionData(p => ({ ...p, mother_contact: e.target.value }))} />
+
                     </div>
 
                     {/* Buttons */}

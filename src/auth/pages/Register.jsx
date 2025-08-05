@@ -35,14 +35,14 @@ const Admission = ({ onAdmit }) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <FormField label="School Campus">
                                 <SchoolCampus
-                                    value={admissionData.school_campus}
-                                    onChange={(value) => setAdmissionData({ ...admissionData, school_campus: value })}
+                                    value={admissionData.school_campus_id}
+                                    onChange={(value) => setAdmissionData({ ...admissionData, school_campus_id: value })}
                                 />
                             </FormField>
                             <FormField label="Academic Year">
                                 <AcademicYear
-                                    value={admissionData.academic_year}
-                                    onChange={(value) => setAdmissionData({ ...admissionData, academic_year: value })}
+                                    value={admissionData.academic_year_id}
+                                    onChange={(value) => setAdmissionData({ ...admissionData, academic_year_id: value })}
                                 />
                             </FormField>
                             <FormField label="Application Type">
@@ -51,7 +51,7 @@ const Admission = ({ onAdmit }) => {
                                     onChange={(value) => setAdmissionData({ ...admissionData, application_type: value })}
                                 />
                             </FormField>
-                            <FormField label="Grade_level">
+                            <FormField label="GradeLevel">
                                 <Classifications
                                     value={admissionData.grade_level}
                                     onChange={(value) =>
@@ -60,12 +60,12 @@ const Admission = ({ onAdmit }) => {
                                 />
                             </FormField>
                             <div className="md:col-span-2">
-                                <SeparatorOne />
+                                <SeparatorOne title={"Academic Programs"} />
                             </div>
                             <FormField label="Academic Program">
                                 <AcademicProgram
-                                    value={admissionData.academic_program}
-                                    onChange={(value) => setAdmissionData({ ...admissionData, academic_program: value })}
+                                    value={admissionData.academic_program_id}
+                                    onChange={(value) => setAdmissionData({ ...admissionData, academic_program_id: value })}
                                 />
                             </FormField>
                         </div>
