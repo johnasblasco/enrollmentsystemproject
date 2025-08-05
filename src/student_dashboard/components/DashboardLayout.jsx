@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { useState, useEffect, useContext } from "react"
+
+
 import { LayoutDashboard, BookMarked, BookUser, Menu, House, MessageCircleQuestionMark, ChevronDown } from 'lucide-react';
 import {
     DropdownMenu,
@@ -18,6 +20,7 @@ const DashboardLayout = ({ children }) => {
 
     const { registerData } = useContext(RegisterContext);
 
+    const { pathname } = useLocation();
 
 
     const navigate = useNavigate()
@@ -37,23 +40,12 @@ const DashboardLayout = ({ children }) => {
         localStorage.setItem('sidebarCollapsed', collapsed)
     }, [collapsed])
 
+    const getLinkClass = (path) => {
+        const isExact = pathname === path;
 
-    useEffect(() => {
-        const path = location.pathname
-        if (path.startsWith("/student_dashboard/admission")) {
-            setSection("student_dashboard > admission")
-        } else if (path.startsWith("/student_dashboard/enrollment")) {
-            setSection("student_dashboard > enrollment")
-        } else if (path.startsWith("/student_dashboard/help")) {
-            setSection("student_dashboard > help")
-        } else if (path.startsWith("/student_dashboard/grades")) {
-            setSection("student_dashboard > grades")
-        } else if (path.startsWith("/student_dashboard/profile")) {
-            setSection("student_dashboard > profile")
-        } else {
-            setSection("student_dashboard")
-        }
-    }, [location.pathname])
+        return `p-2 rounded flex items-center gap-2 transition-colors duration-300 ${isExact ? "bg-white text-blue-900 font-semibold" : "hover:bg-neutral-50 hover:text-neutral-900"
+            }`;
+    };
 
     const handleLogout = () => {
         localStorage.removeItem('token')
@@ -64,7 +56,7 @@ const DashboardLayout = ({ children }) => {
     return (
         <div className="flex">
             {/* Sidebar */}
-            <aside className={`fixed top-0 left-0 h-screen bg-gray-900 text-white flex flex-col p-4 transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
+            <aside className={`fixed top-0 left-0 h-screen bg-blue-500 text-white flex flex-col p-4 transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'}`}>
                 {/* Logo and Menu */}
                 <div className={`flex items-center ${collapsed ? 'justify-center' : 'justify-between'}  mb-6`}>
                     <h2 className={`text-2xl font-bold transition-opacity duration-200 ${collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100'}`}>
@@ -78,31 +70,32 @@ const DashboardLayout = ({ children }) => {
 
                 {/* Navigation */}
                 <nav className="flex flex-col gap-3 flex-grow text-sm">
-
-                    <Link to="/student_dashboard" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard" className={getLinkClass("/student_dashboard")}>
                         <LayoutDashboard size={20} />
                         {!collapsed && "dashboard"}
                     </Link>
-                    <Link to="/student_dashboard/admission" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+
+                    <Link to="/student_dashboard/admission" className={getLinkClass("/student_dashboard/admission")}>
                         <BookMarked size={20} />
                         {!collapsed && "Admissions"}
                     </Link>
-                    <Link to="/student_dashboard/grades" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+
+                    <Link to="/student_dashboard/grades" className={getLinkClass("/student_dashboard/grades")}>
                         <BookMarked size={20} />
                         {!collapsed && "Grades"}
                     </Link>
 
-
-                    <Link to="/student_dashboard/enrollment" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+                    <Link to="/student_dashboard/enrollment" className={getLinkClass("/student_dashboard/enrollment")}>
                         <BookUser size={20} />
                         {!collapsed && "Enrollments"}
                     </Link>
-                    <Link to="/student_dashboard/help" className="hover:bg-neutral-50 hover:text-neutral-900 p-2 rounded flex items-center gap-2">
+
+                    <Link to="/student_dashboard/help" className={getLinkClass("/student_dashboard/help")}>
                         <MessageCircleQuestionMark size={20} />
                         {!collapsed && "Help"}
                     </Link>
-
                 </nav>
+
 
             </aside>
 
@@ -111,7 +104,7 @@ const DashboardLayout = ({ children }) => {
                 {/* Header */}
 
 
-                <header className={`z-0 text-white fixed left-0 right-0 h-16 bg-gray-900 shadow flex items-center ${!collapsed ? 'justify-end-safe' : 'justify-between'} px-6 z-40`} style={{ marginLeft: collapsed ? '5rem' : '16rem' }}>
+                <header className={`z-0 text-white fixed left-0 right-0 h-16 bg-blue-500 shadow flex items-center ${!collapsed ? 'justify-end-safe' : 'justify-between'} px-6 z-40`} style={{ marginLeft: collapsed ? '5rem' : '16rem' }}>
                     {collapsed && <h1 className="font-bold text-xl">SNL University</h1>}
                     <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
                         <DropdownMenuTrigger>
@@ -145,7 +138,7 @@ const DashboardLayout = ({ children }) => {
                 )}
                 {/* Main content */}
                 <main className="mt-20 p-6 overflow-auto flex-1">
-                    <div className="mb-10 p-4 bg-neutral-300 flex gap-2">
+                    <div className="mb-10 p-4 bg-blue-100 flex gap-2">
                         <House size={20}></House> <h1 className="text-sm font-semibold">{section}</h1>
                     </div>
                     {children}

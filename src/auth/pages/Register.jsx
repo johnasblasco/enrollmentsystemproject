@@ -24,7 +24,8 @@ const Admission = ({ onAdmit }) => {
                     <form
                         onSubmit={(e) => {
                             e.preventDefault();
-                            console.log("Form submitted");
+                            console.log("Submitting data:", admissionData);
+
                             // next page
                             setNextPage(!nextPage);
                         }}
@@ -50,14 +51,10 @@ const Admission = ({ onAdmit }) => {
                                     onChange={(value) => setAdmissionData({ ...admissionData, application_type: value })}
                                 />
                             </FormField>
-                            <FormField label="Classifications">
+                            <FormField label="Grade_level">
                                 <Classifications
-                                    value={admissionData.classification}
+                                    value={admissionData.grade_level}
                                     onChange={(value) =>
-                                        setAdmissionData({ ...admissionData, classification: value })
-                                    }
-                                    gradeLevel={admissionData.grade_level}
-                                    onGradeChange={(value) =>
                                         setAdmissionData({ ...admissionData, grade_level: value })
                                     }
                                 />

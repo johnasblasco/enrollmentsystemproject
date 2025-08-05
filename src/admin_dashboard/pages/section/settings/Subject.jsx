@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import SubjectSectionTable from './components/SubjectSectionTable';
-import SubjectSectionModal from './components/SubjectSectionModal';
+import SubjectTable from './components/SubjectTable';
+import SubjectModal from './components/SubjectModal';
 
-const SubjectSections = () => {
+const Subject = () => {
     const [subjects, setSubjects] = useState([]);
     const [openModal, setOpenModal] = useState(false);
     const [editingSubject, setEditingSubject] = useState(null);
@@ -24,21 +24,20 @@ const SubjectSections = () => {
                 }
             );
             setSubjects(res.data.subjects);
-            console.log("SHEEESH: ", subjects)
         } catch (err) {
             console.error(err);
         }
     };
 
-    const handleSave = async (data, id) => {
+    const handleSave = async (data) => {
         if (!data.subject_name || !data.subject_code || !data.units) {
             alert('All fields are required.');
             return;
         }
 
         try {
-            const url = id
-                ? `https://server.laravel.bpc-bsis4d.com/public/api/updatesubject/${id}`
+            const url = data.id
+                ? `https://server.laravel.bpc-bsis4d.com/public/api/updatesubject/${data.id}`
                 : 'https://server.laravel.bpc-bsis4d.com/public/api/addsubject';
 
             await axios.post(url, data, {
@@ -80,28 +79,33 @@ const SubjectSections = () => {
             <div className="p-6 space-y-4">
                 <div className="flex justify-between items-center">
                     <h1 className="text-2xl font-bold">Subject Sections</h1>
-                    <Button onClick={() => { setEditingSubject(null); setOpenModal(true); }}>
+                    <Button onClick={() => {
+                        setEditingSubject(null);
+                        setOpenModal(true);
+                    }}>
                         <Plus className="w-4 h-4 mr-2" /> Add Subject
                     </Button>
                 </div>
-                <SubjectSectionTable
-                    data={subjects}
+
+                <SubjectTable
+                    subjects={subjects}
                     onEdit={(subject) => {
                         setEditingSubject(subject);
                         setOpenModal(true);
                     }}
                     onDelete={handleDelete}
                 />
-                {openModal && (
-                    <SubjectSectionModal
-                        subject={editingSubject}
-                        onClose={() => setOpenModal(false)}
-                        onSave={handleSave}
-                    />
-                )}
+
+                <SubjectModal
+                    open={openModal}
+                    setOpen={setOpenModal}
+                    onSubmit={handleSave}
+                    defaultValues={editingSubject}
+                />
             </div>
         </DashboardLayout>
     );
+
 };
 
-export default SubjectSections;
+export default Subject;
