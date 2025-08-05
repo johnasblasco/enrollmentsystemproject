@@ -278,7 +278,7 @@ const RegisterTwo = () => {
 
                     {/* Buttons */}
                     <div className="flex justify-between pt-4 w-full">
-                        <Link to="/" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
+                        <Link to="/register" className="px-6 py-2 bg-gray-300 rounded hover:bg-gray-400">
                             Previous
                         </Link>
                         <Link
