@@ -57,8 +57,10 @@ const Admission = ({ onAdmit }) => {
                                     onChange={(value) =>
                                         setAdmissionData({ ...admissionData, grade_level: value })
                                     }
+                                    applicationType={admissionData.application_type}
                                 />
                             </FormField>
+
                             <div className="md:col-span-2">
                                 <SeparatorOne title={"Academic Programs"} />
                             </div>
@@ -99,31 +101,6 @@ const Admission = ({ onAdmit }) => {
                             console.log("Submitting data:", admissionData);
 
                             const token = localStorage.getItem("token");
-
-                            // axios.post(
-                            //     'https://server.laravel.bpc-bsis4d.com/public/api/applyadmission',
-                            //     admissionData,
-                            //     {
-                            //         headers: {
-                            //             Authorization: `Bearer ${token}`,
-                            //             'Content-Type': 'multipart/form-data', // if sending files!
-                            //         },
-                            //     }
-                            // )
-                            //     .then(() => {
-                            //         swal.fire({
-                            //             title: "Success!",
-                            //             text: "Your admission data has been submitted.",
-                            //             icon: "success",
-                            //             confirmButtonText: "OK"
-                            //         });
-                            //         onAdmit();
-
-                            //     })
-                            //     .catch((error) => {
-                            //         console.error("Submission failed:", error.response?.data || error.message);
-                            //     });
-
 
 
                             navigate('/register/personal-information');

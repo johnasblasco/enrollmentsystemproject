@@ -167,6 +167,29 @@ const RegisterTwo = () => {
                             { value: 'no', label: 'No' },
                         ]} />
                     </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <InputWithLabel type="number" label="Telephone Number" value={admissionData.telephone_number} onChange={e => setAdmissionData(p => ({ ...p, telephone_number: e.target.value }))} />
+                        <InputWithLabel type='number' label="Mobile Number" required value={admissionData.mobile_number} onChange={e => setAdmissionData(p => ({ ...p, mobile_number: e.target.value }))} />
+                        <InputWithLabel label="Email" type="email" required value={admissionData.email} onChange={e => setAdmissionData(p => ({ ...p, email: e.target.value }))} />
+                    </div>
+
+                    {/* Yes/No */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <SelectWithLabel label="Are you a member of 4Ps?" value={admissionData.is_4ps_member} onChange={e => setAdmissionData(p => ({ ...p, is_4ps_member: e.target.value }))} options={[
+                            { value: 'Yes', label: 'Yes' },
+                            { value: 'No', label: 'No' },
+                        ]} />
+                        <SelectWithLabel label="Vaccination Status" value={admissionData.is_vaccinated} onChange={e => setAdmissionData(p => ({ ...p, is_vaccinated: e.target.value }))} options={[
+                            { value: 'Yes', label: 'Yes' },
+                            { value: 'No', label: 'No' },
+                        ]} />
+                        <SelectWithLabel label="IP / Indigenous group?" value={admissionData.is_indigenous} onChange={e => setAdmissionData(p => ({ ...p, is_indigenous: e.target.value }))} options={[
+                            { value: 'Yes', label: 'Yes' },
+                            { value: 'No', label: 'No' },
+                        ]} />
+                    </div>
+
+                    {/* PERSONAL ADRESSSSS */}
 
                     <div className='mt-20 mb-10'>
                         <SeparatorOne title={"Personal Address"} />
@@ -184,6 +207,7 @@ const RegisterTwo = () => {
                             className={`w-full border rounded p-2 ${!admissionData.street_address ? 'border-red-500' : 'border-gray-300'}`}
                         />
                     </div>
+
 
                     {/* Province City Barangay */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -271,27 +295,7 @@ const RegisterTwo = () => {
                         ]} />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <InputWithLabel type="number" label="Telephone Number" value={admissionData.telephone_number} onChange={e => setAdmissionData(p => ({ ...p, telephone_number: e.target.value }))} />
-                        <InputWithLabel type='number' label="Mobile Number" required value={admissionData.mobile_number} onChange={e => setAdmissionData(p => ({ ...p, mobile_number: e.target.value }))} />
-                        <InputWithLabel label="Email" type="email" required value={admissionData.email} onChange={e => setAdmissionData(p => ({ ...p, email: e.target.value }))} />
-                    </div>
 
-                    {/* Yes/No */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <SelectWithLabel label="Are you a member of 4Ps?" value={admissionData.is_4ps_member} onChange={e => setAdmissionData(p => ({ ...p, is_4ps_member: e.target.value }))} options={[
-                            { value: 'Yes', label: 'Yes' },
-                            { value: 'No', label: 'No' },
-                        ]} />
-                        <SelectWithLabel label="Vaccination Status" value={admissionData.is_vaccinated} onChange={e => setAdmissionData(p => ({ ...p, is_vaccinated: e.target.value }))} options={[
-                            { value: 'Yes', label: 'Yes' },
-                            { value: 'No', label: 'No' },
-                        ]} />
-                        <SelectWithLabel label="IP / Indigenous group?" value={admissionData.is_indigenous} onChange={e => setAdmissionData(p => ({ ...p, is_indigenous: e.target.value }))} options={[
-                            { value: 'Yes', label: 'Yes' },
-                            { value: 'No', label: 'No' },
-                        ]} />
-                    </div>
 
                     <div className='mt-20 mb-10'>
                         <SeparatorOne title={"Guardians and Parents Information"} />

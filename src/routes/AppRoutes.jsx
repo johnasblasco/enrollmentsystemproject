@@ -37,6 +37,7 @@ import SchoolYear from '../admin_dashboard/pages/section/settings/SchoolYear';
 import Sections from '../admin_dashboard/pages/section/settings/Sections';
 import Courses from '../admin_dashboard/pages/section/settings/Courses';
 import Subject from '../admin_dashboard/pages/section/settings/Subject';
+import Departments from '../admin_dashboard/pages/section/settings/Departments';
 
 
 const AppRoutes = () => {
@@ -242,12 +243,19 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             )
         },
-
         {
             path: '/admin_dashboard/settings/subject',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <Subject />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/departments',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Departments />
                 </ProtectedRoute>
             )
         },

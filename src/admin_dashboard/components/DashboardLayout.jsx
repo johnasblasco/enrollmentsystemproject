@@ -14,7 +14,7 @@ import {
     Settings,
     LifeBuoy
 } from "lucide-react";
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -134,28 +134,68 @@ const AdminDashboardLayout = ({ children }) => {
 
             {/* Main layout */}
             <div className={`transition-all duration-300 flex-1 flex flex-col min-h-screen bg-gray-50 ${collapsed ? "ml-20" : "ml-64"}`}>
-                <header className={`text-white fixed left-0 right-0 h-16 bg-blue-500 shadow flex items-center ${!collapsed ? "justify-end" : "justify-between"} px-6 z-40`} style={{ marginLeft: collapsed ? "5rem" : "16rem" }}>
+                <header
+                    className={`text-white fixed left-0 right-0 h-16 bg-blue-500 shadow flex items-center justify-between px-6 z-40`}
+                    style={{ marginLeft: collapsed ? "5rem" : "16rem" }}
+                >
                     {collapsed && <h1 className="font-bold text-xl">SNL University</h1>}
 
-                    <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
-                        <DropdownMenuTrigger>
-                            <img
-                                src="https://via.placeholder.com/40"
-                                alt="Profile"
-                                className="mr-6 w-10 h-10 rounded-full border hover:cursor-pointer"
-                            />
-                        </DropdownMenuTrigger>
+                    <div className="flex items-center gap-4 ml-auto">
+                        {/* 📅 Calendar Date */}
+                        <span className="text-sm font-medium text-white">
+                            {new Date().toLocaleDateString("en-US", {
+                                weekday: "short",
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                            })}
+                        </span>
 
-                        <DropdownMenuContent className="relative right-16 w-46">
-                            <DropdownMenuSeparator />
-                            <DropdownMenuLabel>{registerData?.surname || "Admin"}</DropdownMenuLabel>
-                            <DropdownMenuItem className="hover:cursor-pointer">Profile</DropdownMenuItem>
-                            <DropdownMenuItem className="hover:cursor-pointer" onClick={handleLogout}>
-                                Logout
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                        {/* 🔔 Notifications */}
+                        <DropdownMenu>
+                            <DropdownMenuTrigger className="relative focus:outline-none">
+                                <div className="relative hover:opacity-80 transition cursor-pointer">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-6 w-6 text-white"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405C18.79 14.79 18 13.42 18 12V8a6 6 0 00-12 0v4c0 1.42-.79 2.79-1.595 3.595L3 17h5m7 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                    <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-500 rounded-full" />
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-64 bg-white shadow-lg text-black">
+                                <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem className="text-sm text-muted-foreground">🎉 New student approved</DropdownMenuItem>
+                                <DropdownMenuItem className="text-sm text-muted-foreground">📢 Schedule update posted</DropdownMenuItem>
+                                <DropdownMenuItem className="text-sm text-muted-foreground">📨 2 unread inquiries</DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        {/* 👤 Avatar & Dropdown */}
+                        <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
+                            <DropdownMenuTrigger asChild>
+                                <Avatar>
+                                    <AvatarImage src="https://github.com/shadcn.png" />
+                                    <AvatarFallback>CN</AvatarFallback>
+                                </Avatar>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-48">
+                                <DropdownMenuLabel>{registerData?.surname || "Admin"}</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem className="hover:cursor-pointer">Profile</DropdownMenuItem>
+                                <DropdownMenuItem className="hover:cursor-pointer" onClick={handleLogout}>
+                                    Logout
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </header>
+
 
                 {menuOpen && <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setMenuOpen(false)} />}
 

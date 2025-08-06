@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import {
     Users,
     Notebook,
-    FileText,
+    House,
     Settings,
     MailCheck,
     School,
@@ -72,6 +72,20 @@ const AdminSettingPage = () => {
                         </CardContent>
                     </Card>
 
+                    {/* User Types */}
+                    <Card className="flex flex-col justify-between">
+                        <CardHeader className="flex flex-col gap-2">
+                            <ShieldCheck className="text-rose-600 w-5 h-5" />
+                            <CardTitle>User Roles</CardTitle>
+                            <p className="text-sm text-muted-foreground">Define and manage admin, staff, or student roles.</p>
+                        </CardHeader>
+                        <CardContent>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/roles')}>
+                                Manage Roles
+                            </Button>
+                        </CardContent>
+                    </Card>
+
                     {/* Campuses */}
                     <Card className="flex flex-col justify-between">
                         <CardHeader className="flex flex-col gap-2">
@@ -82,6 +96,20 @@ const AdminSettingPage = () => {
                         <CardContent>
                             <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/campuses')}>
                                 Manage Campuses
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    {/* Department */}
+                    <Card className="flex flex-col justify-between">
+                        <CardHeader className="flex flex-col gap-2">
+                            <House className="text-yellow-400 w-5 h-5" />
+                            <CardTitle>Department</CardTitle>
+                            <p className="text-sm text-muted-foreground">Manage Departments for University</p>
+                        </CardHeader>
+                        <CardContent>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/departments')}>
+                                Manage Departments
                             </Button>
                         </CardContent>
                     </Card>
@@ -116,19 +144,6 @@ const AdminSettingPage = () => {
                         </CardContent>
                     </Card>
 
-                    {/* User Types */}
-                    <Card className="flex flex-col justify-between">
-                        <CardHeader className="flex flex-col gap-2">
-                            <ShieldCheck className="text-rose-600 w-5 h-5" />
-                            <CardTitle>User Roles</CardTitle>
-                            <p className="text-sm text-muted-foreground">Define and manage admin, staff, or student roles.</p>
-                        </CardHeader>
-                        <CardContent>
-                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/roles')}>
-                                Manage Roles
-                            </Button>
-                        </CardContent>
-                    </Card>
 
                     {/* Sections */}
                     <Card className="flex flex-col justify-between">
@@ -158,7 +173,6 @@ const AdminSettingPage = () => {
                             </Button>
                         </CardContent>
                     </Card>
-
                 </div>
             </div>
         </DashboardLayout>
