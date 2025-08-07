@@ -14,11 +14,13 @@ const AdminAdmissionPage = () => {
     const navigate = useNavigate();
 
     const [users, setUsers] = useState([]);
+    const [approvedUsers, setApprovedUsers] = useState([]);
 
     const fetchUsers = async () => {
         try {
             const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getadmissions");
             setUsers(res.data.admissions || []);
+            setApprovedUsers()
         } catch (error) {
             console.error("Error fetching users:", error);
         }
@@ -59,7 +61,7 @@ const AdminAdmissionPage = () => {
                         <CardHeader className="space-y-2">
                             <div className="flex items-center gap-2 text-green-700">
                                 <UserCheck className="w-5 h-5" />
-                                <CardTitle>Approved Students ({"https://server.laravel.bpc-bsis4d.com/public/api/getadmissions?status=${filter}" || 0})</CardTitle>
+                                <CardTitle>Approved Students ({0 || 0})</CardTitle>
                             </div>
                             <p className="text-sm text-muted-foreground">
                                 Handle exam admission for approve applicants.
