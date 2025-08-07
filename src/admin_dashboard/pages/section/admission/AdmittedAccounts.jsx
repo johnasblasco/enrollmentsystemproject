@@ -4,8 +4,9 @@ import axios from "axios"
 import { Mail, Trash2, Eye } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { CheckCircle, XCircle } from "lucide-react"
+import { CheckCircle, XCircle, Loader2 } from "lucide-react"
 
+import { Label } from '@/components/ui/label';
 import {
     Drawer,
     DrawerClose,
@@ -23,6 +24,14 @@ import {
     SelectContent,
     SelectItem,
 } from "@/components/ui/select";
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from '@/components/ui/dialog';
 
 import {
     Pagination,
@@ -33,6 +42,8 @@ import {
 } from "@/components/ui/pagination"
 
 const AdmittedAccounts = () => {
+
+    const [isSending, setIsSending] = useState(false);
 
     const [loadingId, setLoadingId] = useState(null)
 
@@ -49,7 +60,14 @@ const AdmittedAccounts = () => {
     const [totalPages, setTotalPages] = useState(1)
     const [statusFilter, setStatusFilter] = useState("all");
 
-
+    const [openDialog, setOpenDialog] = useState(false);
+    const [examData, setExamData] = useState({
+        exam_date: '',
+        room_assignment: '',
+        exam_time_from: '',
+        exam_time_to: '',
+        building: ''
+    });
 
 
     const fetchUsers = async () => {
@@ -67,46 +85,54 @@ const AdmittedAccounts = () => {
         }
     }
 
-
     useEffect(() => { fetchUsers() }, [page])
 
-    const handleSendEmail = async () => {
-        const token = localStorage.getItem("token");
-
-        const approvedUsers = users.filter(user => user.status === "approved");
-
-        if (approvedUsers.length === 0) {
-            alert("⚠️ No approved users to email.");
+    const handleSendExams = async () => {
+        if (selectedUsers.length === 0) {
+            alert("⚠️ Please select applicants first.");
             return;
         }
 
-        const emailBody = approvedUsers.map(user =>
-            `• ${user.first_name} ${user.last_name} - ${user.email}`
-        ).join('\n');
+        const token = localStorage.getItem('token');
+
+        const payload = {
+            applicant_ids: selectedUsers,
+            ...examData
+        };
+
+        console.log("📤 Sending to backend:", payload);
 
         try {
+            setIsSending(true); // Set sending state
+
             const res = await axios.post(
-                `https://server.laravel.bpc-bsis4d.com/public/api/send-email`,
-                {
-                    subject: "Approved Admissions",
-                    body: emailBody,
-                },
-                {
-                    headers: { Authorization: `Bearer ${token}` },
-                }
+                'https://server.laravel.bpc-bsis4d.com/public/api/sendexamination',
+                payload,
+                { headers: { Authorization: `Bearer ${token}` } }
             );
 
             if (res.data.isSuccess) {
-                alert("✅ Emails sent to approved users.");
+                alert("✅ Emails sent successfully.");
+                setOpenDialog(false); // Close dialog
+                setSelectedUsers([]); // Clear selection if needed
             } else {
-                alert("⚠️ Failed to send emails.");
+                alert("⚠️ Backend rejected the request.");
+                console.error("Backend response:", res.data);
             }
-        } catch (err) {
-            console.error(err);
-            alert("❌ Error sending emails.");
+
+        } catch (error) {
+            console.error("❌ Failed to send exams:", error);
+
+            if (error.response?.data) {
+                alert("❌ Laravel says: " + JSON.stringify(error.response.data));
+            } else {
+                alert("❌ Network or server error. Check console.");
+            }
+
+        } finally {
+            setIsSending(false); // Reset sending state
         }
     };
-
 
     const handleApprove = async (id) => {
         const token = localStorage.getItem("token");
@@ -189,7 +215,92 @@ const AdmittedAccounts = () => {
 
 
 
-                    <Button onClick={handleSendEmail}><Mail size={16} /> Send Email</Button>
+                    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                        <DialogTrigger asChild>
+                            <Button disabled={selectedUsers.length === 0}>
+                                <Mail size={16} className="mr-2" />
+                                Send Exam Email
+                            </Button>
+                        </DialogTrigger>
+
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>Send Exam Schedule</DialogTitle>
+                            </DialogHeader>
+
+                            <div className="grid gap-4 py-4">
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="exam_date">Exam Date</Label>
+                                    <Input
+                                        id="exam_date"
+                                        type="date"
+                                        value={examData.exam_date}
+                                        onChange={(e) => setExamData({ ...examData, exam_date: e.target.value })}
+                                        className="col-span-3"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="exam_time_from">Time From</Label>
+                                    <Input
+                                        id="exam_time_from"
+                                        type="time"
+                                        value={examData.exam_time_from}
+                                        onChange={(e) => setExamData({ ...examData, exam_time_from: e.target.value })}
+                                        className="col-span-3"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="exam_time_to">Time To</Label>
+                                    <Input
+                                        id="exam_time_to"
+                                        type="time"
+                                        value={examData.exam_time_to}
+                                        onChange={(e) => setExamData({ ...examData, exam_time_to: e.target.value })}
+                                        className="col-span-3"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="room_assignment">Room Assignment</Label>
+                                    <Input
+                                        id="room_assignment"
+                                        value={examData.room_assignment}
+                                        onChange={(e) => setExamData({ ...examData, room_assignment: e.target.value })}
+                                        className="col-span-3"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-4 items-center gap-4">
+                                    <Label htmlFor="building">Building</Label>
+                                    <Input
+                                        id="building"
+                                        value={examData.building}
+                                        onChange={(e) => setExamData({ ...examData, building: e.target.value })}
+                                        className="col-span-3"
+                                    />
+                                </div>
+                            </div>
+
+                            <DialogFooter>
+                                <Button type="submit" disabled={isSending} onClick={handleSendExams}>
+                                    {isSending ? (
+                                        <span className="flex items-center gap-2">
+                                            <Loader2 className="h-4 w-4 animate-spin" />
+                                            Sending...
+                                        </span>
+                                    ) : (
+                                        "Send Email"
+                                    )}
+                                </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
+
+
+
+
                 </div>
 
                 {loading ? <p>Loading...</p> : (
@@ -199,7 +310,7 @@ const AdmittedAccounts = () => {
                             <thead>
                                 <tr className="bg-gray-100 text-left">
                                     <th className="p-2">
-                                        <input type="checkbox" checked={selectAll} onChange={handleSelectAll} />
+                                        <input type="checkbox" className="size-5" checked={selectAll} onChange={handleSelectAll} />
                                     </th>
                                     <th className='p-2'>Applicant Number</th>
                                     <th className="p-2">Name</th>
@@ -214,8 +325,9 @@ const AdmittedAccounts = () => {
                                     <Drawer key={user.id}>
                                         <DrawerTrigger asChild>
                                             <tr className="border-b hover:bg-gray-50 cursor-pointer">
-                                                <td className="p-2">
+                                                <td className="p-2 ">
                                                     <input
+                                                        className="size-5"
                                                         type="checkbox"
                                                         checked={selectedUsers.includes(user.id)}
                                                         onChange={() => handleSelectUser(user.id)}

@@ -14,21 +14,42 @@ const AdminAdmissionPage = () => {
     const navigate = useNavigate();
 
     const [users, setUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [lastPage, setLastPage] = useState(1);
+
     const [approvedUsers, setApprovedUsers] = useState([]);
 
     const fetchUsers = async () => {
         try {
-            const res = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/getadmissions");
-            setUsers(res.data.admissions || []);
-            setApprovedUsers()
+            let allUsers = [];
+            let page = 1;
+            let lastPage = 1;
+
+            // Loop through all pages
+            while (page <= lastPage) {
+                const res = await axios.get(`https://server.laravel.bpc-bsis4d.com/public/api/getadmissions?page=${page}`);
+                const admissions = res.data.admissions || [];
+
+                allUsers = [...allUsers, ...admissions];
+
+                lastPage = res.data.pagination.last_page;
+                page++;
+            }
+
+            const approved = allUsers.filter(user => user.status === 'approved');
+
+            setUsers(allUsers);
+            setApprovedUsers(approved);
+
         } catch (error) {
             console.error("Error fetching users:", error);
         }
     };
 
     useEffect(() => {
-        fetchUsers();
+        fetchUsers(currentPage);
     }, []);
+
 
     return (
         <DashboardLayout>
@@ -42,7 +63,7 @@ const AdminAdmissionPage = () => {
                                 <CardTitle>Admitted Students ({users?.length || 0})</CardTitle>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                View and manage admitted accounts.
+                                Managed the Approval and Deletion of admitted accounts.
                             </p>
                         </CardHeader>
                         <CardContent>
@@ -51,7 +72,7 @@ const AdminAdmissionPage = () => {
                                 size="sm"
                                 onClick={() => navigate('/admin_dashboard/admissions/admitted-accounts')}
                             >
-                                View Admitted Students
+                                Manage Admitted Students
                             </Button>
                         </CardContent>
                     </Card>
@@ -61,10 +82,10 @@ const AdminAdmissionPage = () => {
                         <CardHeader className="space-y-2">
                             <div className="flex items-center gap-2 text-green-700">
                                 <UserCheck className="w-5 h-5" />
-                                <CardTitle>Approved Students ({0 || 0})</CardTitle>
+                                <CardTitle>Accepted Students ({approvedUsers?.length || 0})</CardTitle>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                Handle exam admission for approve applicants.
+                                Handle Accepted applicants admission that takes the Examinations.
                             </p>
                         </CardHeader>
                         <CardContent>
@@ -74,7 +95,7 @@ const AdminAdmissionPage = () => {
                                 onClick={() => navigate('/admin_dashboard/admissions/approved-accounts')}
 
                             >
-                                Manage Approved Students
+                                View Accepted Students
                             </Button>
                         </CardContent>
                     </Card>

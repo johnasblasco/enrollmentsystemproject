@@ -12,7 +12,7 @@ const AdminHelpPage = () => {
     return (
         <DashboardLayout>
             <div>
-                <h1>labyuuuuuuuuuuuuu</h1>
+                <h1>Helpppppp</h1>
             </div>
         </DashboardLayout>
     )

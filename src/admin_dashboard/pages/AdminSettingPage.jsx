@@ -15,6 +15,7 @@ import {
     Layers,
     BookOpenText,
     ShieldCheck,
+    BookAlert
 } from 'lucide-react'
 
 const AdminSettingPage = () => {
@@ -96,6 +97,20 @@ const AdminSettingPage = () => {
                         <CardContent>
                             <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/campuses')}>
                                 Manage Campuses
+                            </Button>
+                        </CardContent>
+                    </Card>
+
+                    {/* Department */}
+                    <Card className="flex flex-col justify-between">
+                        <CardHeader className="flex flex-col gap-2">
+                            <BookAlert className="text-cyan-900 w-5 h-5" />
+                            <CardTitle>Curriculum</CardTitle>
+                            <p className="text-sm text-muted-foreground">Manage School Year Curriculum </p>
+                        </CardHeader>
+                        <CardContent>
+                            <Button size="sm" onClick={() => navigate('/admin_dashboard/settings/curriculum')}>
+                                Manage Curriculum
                             </Button>
                         </CardContent>
                     </Card>

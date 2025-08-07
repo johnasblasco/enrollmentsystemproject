@@ -41,6 +41,7 @@ import Sections from '../admin_dashboard/pages/section/settings/Sections';
 import Courses from '../admin_dashboard/pages/section/settings/Courses';
 import Subject from '../admin_dashboard/pages/section/settings/Subject';
 import Departments from '../admin_dashboard/pages/section/settings/Departments';
+import Curriculum from '../admin_dashboard/pages/section/settings/Curriculum'
 
 
 const AppRoutes = () => {
@@ -268,6 +269,14 @@ const AppRoutes = () => {
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
                     <Departments />
+                </ProtectedRoute>
+            )
+        },
+        {
+            path: '/admin_dashboard/settings/curriculum',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <Curriculum />
                 </ProtectedRoute>
             )
         },
