@@ -29,6 +29,9 @@ import AdminHelpPage from '../admin_dashboard/pages/AdminHelpPage';
 //admin admission
 import AdmittedAccounts from '../admin_dashboard/pages/section/admission/AdmittedAccounts';
 
+//admin enrollments
+import ApprovedAccounts from '../admin_dashboard/pages/section/admission/ApprovedAccounts'
+
 //admin settings
 import Users from '../admin_dashboard/pages/section/settings/Users';
 import UserRoles from '../admin_dashboard/pages/section/settings/UserRoles';
@@ -145,6 +148,15 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             )
         },
+        {
+            path: '/admin_dashboard/admissions/approved-accounts',
+            element: (
+                <ProtectedRoute allowedRoles={['admin']}>
+                    <ApprovedAccounts />
+                </ProtectedRoute>
+            )
+        },
+
 
         // Admin Cashier
         {
@@ -259,6 +271,8 @@ const AppRoutes = () => {
                 </ProtectedRoute>
             )
         },
+
+
 
         // Fallback route for unauthorized access
         {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import DashboardLayout from '../components/DashboardLayout';
+import DashboardLayout from '../components/DashboardLayout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
@@ -54,12 +54,12 @@ const AdminAdmissionPage = () => {
                         </CardContent>
                     </Card>
 
-                    {/* Reserve Users */}
+                    {/* Approved Users */}
                     <Card className="flex flex-col justify-between h-full">
                         <CardHeader className="space-y-2">
                             <div className="flex items-center gap-2 text-green-700">
                                 <UserCheck className="w-5 h-5" />
-                                <CardTitle>Approved Students ({0 || 0})</CardTitle>
+                                <CardTitle>Approved Students ({"https://server.laravel.bpc-bsis4d.com/public/api/getadmissions?status=${filter}" || 0})</CardTitle>
                             </div>
                             <p className="text-sm text-muted-foreground">
                                 Handle exam admission for approve applicants.
@@ -69,6 +69,7 @@ const AdminAdmissionPage = () => {
                             <Button
                                 className="w-full"
                                 size="sm"
+                                onClick={() => navigate('/admin_dashboard/admissions/approved-accounts')}
 
                             >
                                 Manage Approved Students
