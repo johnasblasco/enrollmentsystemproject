@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DashboardLayout from '@/admin_dashboard/components/DashboardLayout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, BookOpen, School } from 'lucide-react';
+import { Plus, BookOpen } from 'lucide-react';
 import CurriculumModal from './components/CurriculumModal';
 import CurriculumTable from './components/CurriculumTable';
 import axios from 'axios';
@@ -13,8 +13,8 @@ const Curriculum = () => {
     const [open, setOpen] = useState(false);
 
     const fetchCurriculums = async () => {
-        const res = await axios.get('https://server.laravel.bpc-bsis4d.com/public/api/getcurriculum');
-        setCurriculums(res.data);
+        const res = await axios.get('https://server.laravel.bpc-bsis4d.com/public/api/getcurriculums');
+        setCurriculums(res.data.curriculum);
     };
 
     useEffect(() => {
@@ -23,11 +23,16 @@ const Curriculum = () => {
 
     const handleSave = async (data, id) => {
         if (id) {
-            await axios.put(`https://server.laravel.bpc-bsis4d.com/public/api/curriculums/${id}`, data);
+            await axios.put(`https://server.laravel.bpc-bsis4d.com/public/api/updatecurriculums/${id}`, data);
         } else {
-            await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/curriculums`, data);
+            await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/createcurriculums`, data);
         }
         setOpen(false);
+        fetchCurriculums();
+    };
+
+    const handleDelete = async (id) => {
+        await axios.delete(`https://server.laravel.bpc-bsis4d.com/public/api/deletecurriculum/${id}`);
         fetchCurriculums();
     };
 
@@ -35,18 +40,20 @@ const Curriculum = () => {
         <DashboardLayout>
             <Card>
                 <CardHeader className="flex flex-row justify-between items-center">
-                    <div>
-                        <CardTitle className="text-xl flex items-center gap-2">
-                            <BookOpen className="w-5 h-5" />
-                            Curriculum
-                        </CardTitle>
-                    </div>
+                    <CardTitle className="text-xl flex items-center gap-2">
+                        <BookOpen className="w-5 h-5" />
+                        Curriculum
+                    </CardTitle>
                     <Button onClick={() => { setSelected(null); setOpen(true); }}>
                         <Plus className="w-4 h-4 mr-1" /> Add Curriculum
                     </Button>
                 </CardHeader>
                 <CardContent>
-                    <CurriculumTable data={curriculums} onEdit={(item) => { setSelected(item); setOpen(true); }} />
+                    <CurriculumTable
+                        curriculums={curriculums}
+                        onEdit={(item) => { setSelected(item); setOpen(true); }}
+                        onDelete={handleDelete}
+                    />
                 </CardContent>
             </Card>
 

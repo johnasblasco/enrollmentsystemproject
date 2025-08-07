@@ -1,102 +1,116 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { useState, useEffect } from 'react';
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const CurriculumModal = ({ curriculum, onClose, onSave }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        course_id: '',
-        subject_ids: [],
-    });
-
+const CurriculumModal = ({ open, onOpenChange, onSave, initialData }) => {
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [courseId, setCourseId] = useState("");
+    const [subjectIds, setSubjectIds] = useState([]);
     const [courses, setCourses] = useState([]);
     const [subjects, setSubjects] = useState([]);
 
     useEffect(() => {
-        // Fetch related data
-        fetchCourses();
-        fetchSubjects();
-
-        if (curriculum) {
-            setFormData({
-                name: curriculum.name || '',
-                course_id: curriculum.course_id || '',
-                subject_ids: curriculum.subject_ids || [],
-            });
+        if (initialData) {
+            setName(initialData.curriculum_name || "");
+            setDescription(initialData.curriculum_description || "");
+            setCourseId(initialData.course_id || "");
+            setSubjectIds(initialData.subjects?.map((s) => s.id) || []);
         } else {
-            setFormData({ name: '', course_id: '', subject_ids: [] });
+            setName("");
+            setDescription("");
+            setCourseId("");
+            setSubjectIds([]);
         }
-    }, [curriculum]);
+    }, [initialData]);
 
-    const fetchCourses = async () => {
-        const res = await fetch('https://server.laravel.bpc-bsis4d.com/public/api/courses');
-        const data = await res.json();
-        setCourses(data);
-    };
-
-    const fetchSubjects = async () => {
-        const res = await fetch('https://server.laravel.bpc-bsis4d.com/public/api/subjects');
-        const data = await res.json();
-        setSubjects(data);
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleMultiSelect = (e) => {
-        const selectedOptions = Array.from(e.target.selectedOptions, (option) => option.value);
-        setFormData({ ...formData, subject_ids: selectedOptions });
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            const courseRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/courses");
+            const subjectRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/subjects");
+            setCourses(courseRes.data);
+            setSubjects(subjectRes.data);
+        };
+        fetchData();
+    }, []);
 
     const handleSubmit = () => {
-        onSave(formData, curriculum?.id);
+        onSave({
+            curriculum_name: name,
+            curriculum_description: description,
+            course_id: courseId,
+            subject_ids: subjectIds
+        });
+        onOpenChange(false);
+    };
+
+    const handleCheckboxChange = (id) => {
+        setSubjectIds((prev) =>
+            prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
+        );
     };
 
     return (
-        <Dialog open onOpenChange={onClose}>
+        <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>{curriculum ? 'Edit Curriculum' : 'Add Curriculum'}</DialogTitle>
+                    <DialogTitle>{initialData ? "Edit Curriculum" : "Add Curriculum"}</DialogTitle>
                 </DialogHeader>
-                <div className="space-y-4">
-                    <Input
-                        placeholder="Curriculum Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
-                    <select
-                        name="course_id"
-                        className="w-full p-2 border rounded"
-                        value={formData.course_id}
-                        onChange={handleChange}
-                    >
-                        <option value="">Select Course</option>
-                        {courses.map((course) => (
-                            <option key={course.id} value={course.id}>
-                                {course.course_name}
-                            </option>
-                        ))}
-                    </select>
-                    <select
-                        multiple
-                        className="w-full p-2 border rounded"
-                        value={formData.subject_ids}
-                        onChange={handleMultiSelect}
-                    >
-                        {subjects.map((subject) => (
-                            <option key={subject.id} value={subject.id}>
-                                {subject.subject_name}
-                            </option>
-                        ))}
-                    </select>
-                    <Button onClick={handleSubmit}>
-                        {curriculum ? 'Update' : 'Save'}
-                    </Button>
+
+                <div className="grid gap-4 py-4">
+                    <div className="space-y-2">
+                        <Label>Curriculum Name</Label>
+                        <Input value={name} onChange={(e) => setName(e.target.value)} />
+                    </div>
+                    <div className="space-y-2">
+                        <Label>Description</Label>
+                        <Input value={description} onChange={(e) => setDescription(e.target.value)} />
+                    </div>
+                    <div className="space-y-2">
+                        <Label>Course</Label>
+                        <select
+                            value={courseId}
+                            onChange={(e) => setCourseId(e.target.value)}
+                            className="w-full border rounded px-3 py-2"
+                        >
+                            <option value="">Select Course</option>
+                            {courses.map((course) => (
+                                <option key={course.id} value={course.id}>
+                                    {course.course_name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label>Subjects</Label>
+                        <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto border p-2 rounded">
+                            {subjects.map((subject) => (
+                                <label key={subject.id} className="flex items-center space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        checked={subjectIds.includes(subject.id)}
+                                        onChange={() => handleCheckboxChange(subject.id)}
+                                    />
+                                    <span>{subject.subject_name}</span>
+                                </label>
+                            ))}
+                        </div>
+                    </div>
                 </div>
+
+                <DialogFooter>
+                    <Button onClick={handleSubmit}>{initialData ? "Update" : "Save"}</Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
