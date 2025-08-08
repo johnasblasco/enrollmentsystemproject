@@ -19,6 +19,7 @@ const SectionTable = ({ sections, onEdit, onDelete }) => {
                     <TableHeader>
                         <TableRow>
                             <TableHead>Section Name</TableHead>
+                            <TableHead>Section Size</TableHead>
                             <TableHead>Course</TableHead>
                             <TableHead>Campus</TableHead>
                             <TableHead className="text-right">Actions</TableHead>
@@ -28,6 +29,7 @@ const SectionTable = ({ sections, onEdit, onDelete }) => {
                         {sections.map((section) => (
                             <TableRow key={section.id}>
                                 <TableCell>{section.section_name}</TableCell>
+                                <TableCell>{section.section_size}</TableCell>
                                 <TableCell>{section.course?.name}</TableCell>
                                 <TableCell>{section.campus?.campus_name}</TableCell>
                                 <TableCell className="flex justify-end gap-2">

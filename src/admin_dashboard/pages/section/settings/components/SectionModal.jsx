@@ -8,6 +8,7 @@ import { useState } from "react";
 const SectionModal = ({ section, campuses, courses, onClose, onSave }) => {
     const [form, setForm] = useState({
         section_name: section?.section_name || "",
+        section_size: section?.section_size || "",
         campus_id: section?.campus_id || "",
         course_id: section?.course_id || "",
     });
@@ -31,6 +32,10 @@ const SectionModal = ({ section, campuses, courses, onClose, onSave }) => {
                     <div>
                         <Label>Section Name</Label>
                         <Input value={form.section_name} onChange={(e) => handleChange("section_name", e.target.value)} />
+                    </div>
+                    <div>
+                        <Label>Section Size</Label>
+                        <Input type={"number"} value={form.section_size} onChange={(e) => handleChange("section_size", e.target.value)} />
                     </div>
 
                     <div>

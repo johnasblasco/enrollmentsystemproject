@@ -47,10 +47,11 @@ const Sections = () => {
     };
 
     const handleSave = async (data, id) => {
-        if (!data.section_name || !data.course_id || !data.campus_id) return alert("All fields required.");
+        if (!data.section_name || !data.section_size || !data.course_id || !data.campus_id) return alert("All fields required.");
 
         const payload = {
             section_name: data.section_name,
+            section_size: data.section_size,
             course_id: data.course_id,
             campus_id: data.campus_id,
         };
