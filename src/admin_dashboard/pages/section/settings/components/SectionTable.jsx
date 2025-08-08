@@ -1,33 +1,51 @@
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
+import { Pencil, Trash2 } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const SectionTable = ({ sections, onEdit, onDelete }) => {
     return (
         <Card>
-            <CardContent className="overflow-x-auto p-4">
-                <table className="w-full text-sm">
-                    <thead>
-                        <tr className="text-left font-bold border-b">
-                            <th className="p-2">Section Name</th>
-                            <th className="p-2">Course</th>
-                            <th className="p-2">Campus</th>
-                            <th className="p-2 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <CardContent className="p-4 overflow-x-auto">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Section Name</TableHead>
+                            <TableHead>Course</TableHead>
+                            <TableHead>Campus</TableHead>
+                            <TableHead className="text-right">Actions</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
                         {sections.map((section) => (
-                            <tr key={section.id} className="border-b">
-                                <td className="p-2">{section.section_name}</td>
-                                <td className="p-2">{section.course?.name}</td>
-                                <td className="p-2">{section.campus?.campus_name}</td>
-                                <td className="p-2 flex gap-2 justify-end">
-                                    <Button size="sm" onClick={() => onEdit(section)}>Edit</Button>
-                                    <Button size="sm" variant="destructive" onClick={() => onDelete(section.id)}>Delete</Button>
-                                </td>
-                            </tr>
+                            <TableRow key={section.id}>
+                                <TableCell>{section.section_name}</TableCell>
+                                <TableCell>{section.course?.name}</TableCell>
+                                <TableCell>{section.campus?.campus_name}</TableCell>
+                                <TableCell className="flex justify-end gap-2">
+                                    <Button size="sm" variant="outline" onClick={() => onEdit(section)}>
+                                        <Pencil className="w-4 h-4 " />
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        variant="destructive"
+                                        onClick={() => onDelete(section.id)}
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
                         ))}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             </CardContent>
         </Card>
     );

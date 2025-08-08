@@ -103,7 +103,7 @@ const AdmittedAccounts = () => {
         console.log("📤 Sending to backend:", payload);
 
         try {
-            setIsSending(true); // Set sending state
+            setIsSending(true);
 
             const res = await axios.post(
                 'https://server.laravel.bpc-bsis4d.com/public/api/sendexamination',
@@ -111,27 +111,42 @@ const AdmittedAccounts = () => {
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            if (res.data.isSuccess) {
-                alert("✅ Emails sent successfully.");
-                setOpenDialog(false); // Close dialog
-                setSelectedUsers([]); // Clear selection if needed
+            const data = res.data;
+
+            if (data.isSuccess) {
+                // Check if all were skipped
+                const skipped = data.results.filter(r => r.status === "skipped");
+                const sent = data.results.filter(r => r.status === "success");
+
+                if (skipped.length === data.results.length) {
+                    alert("⚠️ All selected applicants were skipped. Reason: " + skipped[0]?.message);
+                } else if (skipped.length > 0) {
+                    alert(`✅ Some emails sent. ${skipped.length} were skipped:\n` +
+                        skipped.map(s => `• ID ${s.applicant_id}: ${s.message}`).join("\n"));
+                } else {
+                    alert("✅ All exam emails sent successfully!");
+                }
+
+                // Reset form & dialog
+                setSelectedUsers([]);
+                setExamData({ exam_date: '', room_assignment: '', time: '', instructions: '' });
+                setOpenDialog(false)
             } else {
-                alert("⚠️ Backend rejected the request.");
-                console.error("Backend response:", res.data);
+                alert("❌ Failed to send exams: " + data.message);
             }
-
         } catch (error) {
-            console.error("❌ Failed to send exams:", error);
-
+            console.error("❌ Error sending exams:", error);
             if (error.response?.data) {
                 alert("❌ Laravel says: " + JSON.stringify(error.response.data));
             } else {
-                alert("❌ Network or server error. Check console.");
+                alert("❌ Network or unknown error occurred: " + error.message);
+                console.error("Full error:", error);
             }
 
         } finally {
-            setIsSending(false); // Reset sending state
+            setIsSending(false);
         }
+
     };
 
     const handleApprove = async (id) => {

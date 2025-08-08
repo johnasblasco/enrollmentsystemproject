@@ -35,10 +35,10 @@ const CurriculumModal = ({ open, onOpenChange, onSave, initialData }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const courseRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/courses");
-            const subjectRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/subjects");
-            setCourses(courseRes.data);
-            setSubjects(subjectRes.data);
+            const courseRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/dropdown/courses");
+            const subjectRes = await axios.get("https://server.laravel.bpc-bsis4d.com/public/api/dropdown/subjects");
+            setCourses(courseRes.data.courses);
+            setSubjects(subjectRes.data.subject);
         };
         fetchData();
     }, []);
@@ -49,8 +49,8 @@ const CurriculumModal = ({ open, onOpenChange, onSave, initialData }) => {
             curriculum_description: description,
             course_id: courseId,
             subject_ids: subjectIds
-        });
-        onOpenChange(false);
+        }, initialData?.id);
+
     };
 
     const handleCheckboxChange = (id) => {

@@ -78,7 +78,7 @@ const Subject = () => {
         <DashboardLayout>
             <div className="p-6 space-y-4">
                 <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold">Subject Sections</h1>
+                    <h1 className="text-2xl font-bold">Subject</h1>
                     <Button onClick={() => {
                         setEditingSubject(null);
                         setOpenModal(true);
@@ -100,8 +100,10 @@ const Subject = () => {
                     open={openModal}
                     setOpen={setOpenModal}
                     onSubmit={handleSave}
-                    defaultValues={editingSubject}
+                    editingData={editingSubject}
                 />
+
+
             </div>
         </DashboardLayout>
     );

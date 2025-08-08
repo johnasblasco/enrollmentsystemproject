@@ -8,6 +8,7 @@ import {
     Users,
     UserCheck,
     UserSearch,
+    BookOpenCheck
 } from 'lucide-react';
 
 const AdminAdmissionPage = () => {
@@ -81,21 +82,21 @@ const AdminAdmissionPage = () => {
                     <Card className="flex flex-col justify-between h-full">
                         <CardHeader className="space-y-2">
                             <div className="flex items-center gap-2 text-green-700">
-                                <UserCheck className="w-5 h-5" />
-                                <CardTitle>Accepted Students ({approvedUsers?.length || 0})</CardTitle>
+                                <BookOpenCheck className="w-5 h-5" />
+                                <CardTitle>Examination Information</CardTitle>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                Handle Accepted applicants admission that takes the Examinations.
+                                Handle Examination information that contains Campus, rooms and building and Accepted applicants.
                             </p>
                         </CardHeader>
                         <CardContent>
                             <Button
                                 className="w-full"
                                 size="sm"
-                                onClick={() => navigate('/admin_dashboard/admissions/approved-accounts')}
+                                onClick={() => navigate('/admin_dashboard/admissions/examination-info')}
 
                             >
-                                View Accepted Students
+                                View Examination Info
                             </Button>
                         </CardContent>
                     </Card>

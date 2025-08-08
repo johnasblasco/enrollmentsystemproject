@@ -28,9 +28,9 @@ import AdminHelpPage from '../admin_dashboard/pages/AdminHelpPage';
 
 //admin admission
 import AdmittedAccounts from '../admin_dashboard/pages/section/admission/AdmittedAccounts';
+import ExaminationInfo from '../admin_dashboard/pages/section/admission/ExaminationInfo'
 
 //admin enrollments
-import ApprovedAccounts from '../admin_dashboard/pages/section/admission/ApprovedAccounts'
 
 //admin settings
 import Users from '../admin_dashboard/pages/section/settings/Users';
@@ -150,10 +150,10 @@ const AppRoutes = () => {
             )
         },
         {
-            path: '/admin_dashboard/admissions/approved-accounts',
+            path: '/admin_dashboard/admissions/examination-info',
             element: (
                 <ProtectedRoute allowedRoles={['admin']}>
-                    <ApprovedAccounts />
+                    <ExaminationInfo />
                 </ProtectedRoute>
             )
         },

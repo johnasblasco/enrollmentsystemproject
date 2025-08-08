@@ -15,6 +15,7 @@ const Curriculum = () => {
     const fetchCurriculums = async () => {
         const res = await axios.get('https://server.laravel.bpc-bsis4d.com/public/api/getcurriculums');
         setCurriculums(res.data.curriculum);
+        console.log(res);
     };
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const Curriculum = () => {
 
     const handleSave = async (data, id) => {
         if (id) {
-            await axios.put(`https://server.laravel.bpc-bsis4d.com/public/api/updatecurriculums/${id}`, data);
+            await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/updatecurriculums/${id}`, data);
         } else {
             await axios.post(`https://server.laravel.bpc-bsis4d.com/public/api/createcurriculums`, data);
         }
@@ -59,11 +60,14 @@ const Curriculum = () => {
 
             {open && (
                 <CurriculumModal
-                    curriculum={selected}
-                    onClose={() => setOpen(false)}
+                    open={open}
+                    onOpenChange={setOpen}
+                    initialData={selected}
                     onSave={handleSave}
                 />
+
             )}
+
         </DashboardLayout>
     );
 };
